@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLASIANAWW | Lead Systems Engineer</title>
+    <title>BLASIANAWW | Systems Architect</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -13,245 +13,187 @@
             --text: #ffffff;
             --dim: #777;
             --border: #1a1a1a;
+            --glass: rgba(255, 255, 255, 0.03);
         }
 
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg);
             color: var(--text);
             margin: 0;
             scroll-behavior: smooth;
-            overflow-x: hidden;
         }
 
-        /* --- Header/Nav --- */
+        /* --- Navigation --- */
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 8%;
-            position: fixed;
-            width: 84%;
-            top: 0;
-            background: rgba(5, 5, 5, 0.7);
-            backdrop-filter: blur(15px);
-            z-index: 1000;
-            border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 8%; position: fixed; width: 84%; top: 0;
+            background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(15px);
+            z-index: 1000; border-bottom: 1px solid var(--border);
         }
-        .logo { font-weight: 900; font-size: 1.3rem; letter-spacing: -1px; color: var(--text); }
-        .nav-links a { color: var(--dim); text-decoration: none; margin-left: 30px; font-size: 0.8rem; font-weight: 700; transition: 0.3s; text-transform: uppercase; }
-        .nav-links a:hover { color: var(--accent); }
+        .nav-links { display: flex; gap: 25px; align-items: center; }
+        .nav-links a { color: var(--dim); text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: var(--text); }
+        .project-btn { background: var(--accent); color: white !important; padding: 10px 18px; border-radius: 8px; font-weight: 800; }
 
-        /* --- Hero --- */
-        header {
-            padding: 180px 10% 100px;
+        /* --- Hero Section --- */
+        .hero {
+            padding: 180px 10% 100px; text-align: center;
             background: radial-gradient(circle at 50% 0%, #111, #050505);
-            text-align: center;
         }
-        .hero-badge { color: var(--accent); border: 1px solid var(--accent); padding: 6px 15px; border-radius: 30px; font-size: 0.7rem; font-weight: 900; letter-spacing: 1px; }
-        h1 { font-size: 5.5rem; letter-spacing: -5px; margin: 30px 0; line-height: 0.85; text-transform: uppercase; }
-        h1 span { color: var(--accent); text-shadow: 0 0 30px rgba(0, 162, 255, 0.2); }
-        .hero-p { color: var(--dim); font-size: 1.2rem; max-width: 600px; margin: 0 auto 40px; line-height: 1.6; }
+        .hero h1 { font-size: 5.5rem; letter-spacing: -4px; margin: 20px 0; line-height: 0.9; text-transform: uppercase; }
+        .hero h1 span { color: var(--accent); }
+        .hero p { color: var(--dim); font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px; }
 
-        /* --- Projects Grid --- */
-        .container { padding: 80px 10%; }
-        .label { color: #333; font-weight: 900; font-size: 0.8rem; letter-spacing: 4px; display: block; margin-bottom: 40px; }
+        /* --- About & Core Grid --- */
+        .split-grid {
+            display: grid; grid-template-columns: 1fr 1.5fr;
+            gap: 40px; padding: 0 10% 100px;
+        }
+        .about-box { background: var(--card); border: 1px solid var(--border); padding: 40px; border-radius: 24px; }
+        .availability { display: flex; gap: 15px; margin-top: 30px; }
+        .avail-tag { background: #111; border: 1px solid #222; padding: 10px; border-radius: 12px; flex: 1; text-align: center; }
+        .avail-tag span { display: block; font-size: 0.65rem; color: var(--dim); font-weight: 800; margin-bottom: 5px; }
+
+        .core-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .core-card { background: var(--card); border: 1px solid var(--border); padding: 30px; border-radius: 20px; }
+        .core-card i { color: var(--accent); font-size: 1.5rem; margin-bottom: 15px; }
+
+        /* --- My Projects --- */
+        .container { padding: 0 10% 100px; }
+        .p-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; }
+        .p-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; position: relative; }
+        .p-visual { height: 240px; background: #151515; position: relative; display: flex; align-items: center; justify-content: center; }
+        .p-visual::after { content: "BLASIANAWW.ARCH"; position: absolute; bottom: 15px; right: 20px; color: rgba(255,255,255,0.1); font-weight: 900; }
+        .p-content { padding: 30px; }
+        .p-tags { display: flex; gap: 8px; margin-bottom: 15px; }
+        .p-tag { font-size: 0.6rem; font-weight: 800; padding: 4px 10px; background: rgba(0,162,255,0.1); color: var(--accent); border-radius: 5px; border: 1px solid rgba(0,162,255,0.1); }
+        .p-btns { display: flex; gap: 10px; margin-top: 25px; border-top: 1px solid var(--border); padding-top: 20px; }
+        .p-btn { flex: 1; padding: 10px; text-align: center; background: #111; border-radius: 8px; font-size: 0.8rem; font-weight: 800; text-decoration: none; color: white; border: 1px solid #222; }
+
+        /* --- Contact / Support --- */
+        .support-row { display: grid; grid-template-columns: 1.5fr 1fr; gap: 30px; padding: 0 10% 100px; }
+        .support-card { background: var(--card); border: 1px solid var(--border); padding: 50px; border-radius: 30px; display: flex; justify-content: space-between; align-items: center; }
+        .live-status { background: var(--accent); padding: 10px 20px; border-radius: 12px; font-weight: 900; display: flex; align-items: center; gap: 10px; }
         
-        .project-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 25px; 
+        /* --- Modal --- */
+        .modal { 
+            position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); 
+            z-index: 5000; display: none; justify-content: center; align-items: center; 
         }
+        .modal-content { background: #0d0d0d; width: 500px; padding: 40px; border-radius: 30px; border: 1px solid var(--border); }
+        .modal-content input, .modal-content textarea { width: 93%; background: #000; border: 1px solid var(--border); color: white; padding: 15px; margin-bottom: 15px; border-radius: 12px; outline: none; }
+        .submit-btn { width: 100%; background: var(--accent); color: white; padding: 18px; border: none; border-radius: 12px; font-weight: 900; cursor: pointer; }
 
-        .p-card { 
-            background: var(--card); 
-            border: 1px solid var(--border); 
-            border-radius: 16px; 
-            padding: 35px; 
-            position: relative; 
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            overflow: hidden;
-        }
-        .p-card:hover { border-color: var(--accent); transform: translateY(-8px); background: #111; }
-        .p-card::before {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            opacity: 0; transition: 0.3s;
-        }
-        .p-card:hover::before { opacity: 1; }
-
-        .p-icon { font-size: 1.5rem; color: var(--accent); margin-bottom: 20px; }
-        .p-tag { font-size: 0.6rem; font-weight: 900; color: var(--accent); background: rgba(0, 162, 255, 0.05); border: 1px solid rgba(0, 162, 255, 0.2); padding: 4px 8px; border-radius: 4px; margin-right: 5px; }
-        .p-card h3 { font-size: 1.3rem; margin: 15px 0 10px; letter-spacing: -0.5px; }
-        .p-card p { color: var(--dim); font-size: 0.85rem; line-height: 1.5; }
-
-        /* --- Chat Widget --- */
-        .chat-widget {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 350px;
-            background: #0f0f0f;
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-        .chat-header { background: var(--accent); padding: 15px; display: flex; justify-content: space-between; align-items: center; }
-        .chat-header span { font-weight: 900; font-size: 0.8rem; letter-spacing: 1px; }
-        .chat-body { height: 250px; padding: 15px; overflow-y: auto; font-size: 0.85rem; color: var(--dim); display: flex; flex-direction: column; gap: 10px; }
-        .msg { background: #1a1a1a; padding: 10px; border-radius: 8px; align-self: flex-start; max-width: 80%; }
-        .msg.me { background: var(--accent); color: white; align-self: flex-end; }
-        .chat-input { padding: 15px; border-top: 1px solid var(--border); display: flex; gap: 10px; }
-        .chat-input input { background: #000; border: 1px solid var(--border); color: white; padding: 8px; flex: 1; border-radius: 5px; outline: none; font-size: 0.8rem; }
-        .chat-input button { background: var(--accent); border: none; color: white; padding: 0 15px; border-radius: 5px; cursor: pointer; }
-
-        /* --- Footer --- */
-        .contact-footer { border-top: 1px solid var(--border); padding: 60px 10%; display: flex; justify-content: space-between; }
-        .f-item h4 { font-size: 0.7rem; color: #444; letter-spacing: 2px; margin-bottom: 10px; }
-        .f-item p { font-weight: 900; font-size: 1.1rem; margin: 0; }
-
-        @media (max-width: 900px) {
-            h1 { font-size: 3rem; }
-            .chat-widget { width: 90%; right: 5%; bottom: 10px; }
-            .contact-footer { flex-direction: column; gap: 30px; text-align: center; }
-        }
+        @media (max-width: 1000px) { .split-grid, .support-row { grid-template-columns: 1fr; } .hero h1 { font-size: 3rem; } }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">BLASIANAWW.ARCH</div>
+        <div class="logo">BLASIANAWW.dev</div>
         <div class="nav-links">
-            <a href="#projects">Work</a>
-            <a href="#about">Systems</a>
-            <a href="https://discord.com" style="color: var(--accent);">Hire Me</a>
+            <a href="#">Home</a>
+            <a href="#projects">Portfolio</a>
+            <a href="#about">About</a>
+            <a href="javascript:void(0)" onclick="openModal()" class="project-btn">PROJECT FORM</a>
         </div>
     </nav>
 
-    <header>
-        <span class="hero-badge">OPEN FOR COMMISSIONS // 2026</span>
-        <h1>BUILDING <span>SYSTEMS</span><br>NOT JUST SCRIPTS.</h1>
-        <p class="hero-p">High-performance Luau engineer focused on modular frameworks, technical security, and seamless networking.</p>
+    <header class="hero">
+        <div style="margin-bottom: 20px;"><span class="p-tag" style="padding: 6px 15px;">🚀 Ready for 2026 Commissions</span></div>
+        <h1>Creating <span>Immersive</span><br>Roblox Experiences</h1>
+        <p>Expert-level Systems Engineer specializing in high-performance gameplay architecture, modular codebases, and technical security.</p>
+        <div style="display: flex; justify-content: center; gap: 15px;">
+            <a href="#projects" class="p-btn" style="background: var(--accent); border: none; padding: 15px 40px;">View My Work</a>
+            <a href="javascript:void(0)" onclick="openModal()" class="p-btn" style="padding: 15px 40px;">Start a Project</a>
+        </div>
     </header>
 
+    <div class="split-grid" id="about">
+        <div class="about-box">
+            <h2 style="margin: 0;">About Me</h2>
+            <p style="color: var(--dim); margin-top: 20px; line-height: 1.6;">I am a seasoned systems engineer with over 4 years of experience in Luau scripting. My focus is on creating secure, lag-free environments for professional studios.</p>
+            <div class="availability">
+                <div class="avail-tag"><span>AVAILABILITY</span>Full-time / Freelance</div>
+                <div class="avail-tag"><span>RESPONSE TIME</span>Under 24 Hours</div>
+            </div>
+        </div>
+        <div class="core-grid">
+            <div class="core-card"><i class="fas fa-terminal"></i><h3>Luau Scripting</h3><p>Advanced logic, modular frameworks (Knit/Rojo), and complex backend systems.</p></div>
+            <div class="core-card"><i class="fas fa-shield-alt"></i><h3>Security</h3><p>Remote event encryption and server-authoritative physics validation.</p></div>
+            <div class="core-card"><i class="fas fa-bolt"></i><h3>Optimization</h3><p>Improving frame rates and memory management for mobile-friendly scaling.</p></div>
+            <div class="core-card"><i class="fas fa-database"></i><h3>Data Systems</h3><p>Secure, multi-layered data persistence with ProfileService integration.</p></div>
+        </div>
+    </div>
+
     <div class="container" id="projects">
-        <span class="label">// TECHNICAL SHOWCASE</span>
-        <div class="project-grid">
-            
+        <h2 style="font-size: 2.5rem; margin-bottom: 40px;">My Projects</h2>
+        <div class="p-grid">
             <div class="p-card">
-                <i class="fas fa-shield-halved p-icon"></i>
-                <div class="p-tags"><span class="p-tag">SECURITY</span><span class="p-tag">NETWORKING</span></div>
-                <h3>Remote Event Encryption</h3>
-                <p>A custom middleware layer that signs and verifies remote requests using rotating keys to prevent packet injection and unauthorized firing.</p>
+                <div class="p-visual"><i class="fas fa-shield-virus fa-4x" style="color: #1a1a1a;"></i></div>
+                <div class="p-content">
+                    <div class="p-tags"><span class="p-tag">LUAU</span><span class="p-tag">SECURITY</span><span class="p-tag">NETWORKING</span></div>
+                    <h3>Remote Event Firewall</h3>
+                    <p>A sophisticated middleware layer that encrypts client-to-server communication using rotating keys to stop exploiters.</p>
+                    <div class="p-btns"><a href="#" class="p-btn">Play Now</a><a href="#" class="p-btn"><i class="fas fa-code"></i> Source</a></div>
+                </div>
             </div>
-
             <div class="p-card">
-                <i class="fas fa-database p-icon"></i>
-                <div class="p-tags"><span class="p-tag">DATA</span><span class="p-tag">REDUNDANCY</span></div>
-                <h3>Atomic Data Core</h3>
-                <p>ProfileService-integrated data handler with automatic session locking and state-based backup recovery to ensure 100% data persistence.</p>
+                <div class="p-visual"><i class="fas fa-project-diagram fa-4x" style="color: #1a1a1a;"></i></div>
+                <div class="p-content">
+                    <div class="p-tags"><span class="p-tag">MATH</span><span class="p-tag">PLACEMENT</span><span class="p-tag">ENGINE</span></div>
+                    <h3>Voxel Architecture Core</h3>
+                    <p>High-speed building system with server-side collision checks, custom grid snapping, and chunk-based saving.</p>
+                    <div class="p-btns"><a href="#" class="p-btn">Play Now</a><a href="#" class="p-btn"><i class="fas fa-code"></i> Source</a></div>
+                </div>
             </div>
-
-            <div class="p-card">
-                <i class="fas fa-brain p-icon"></i>
-                <div class="p-tags"><span class="p-tag">AI</span><span class="p-tag">MATH</span></div>
-                <h3>Neural NPC Pathfinding</h3>
-                <p>Custom behavior tree implementation with dynamic obstacle avoidance and sensory systems for highly reactive enemy AI.</p>
-            </div>
-
-            <div class="p-card">
-                <i class="fas fa-bolt p-icon"></i>
-                <div class="p-tags"><span class="p-tag">OPTIMIZATION</span><span class="p-tag">UI</span></div>
-                <h3>State-Driven UI Engine</h3>
-                <p>A centralized UI manager that uses Fusion-style reactive states to minimize frame drops and eliminate memory leaks in menus.</p>
-            </div>
-
-            <div class="p-card">
-                <i class="fas fa-link p-icon"></i>
-                <div class="p-tags"><span class="p-tag">BACKEND</span><span class="p-tag">ELO</span></div>
-                <h3>Cross-Server Matchmaker</h3>
-                <p>Utilizing MemoryStoreService for sub-second queue times across thousands of servers with skill-based matchmaking logic.</p>
-            </div>
-
-            <div class="p-card">
-                <i class="fas fa-cube p-icon"></i>
-                <div class="p-tags"><span class="p-tag">PHYSICS</span><span class="p-tag">RAYCAST</span></div>
-                <h3>Voxel Building Engine</h3>
-                <p>Server-authoritative placement system with custom grid-snapping and optimized chunk-based data storage for user builds.</p>
-            </div>
-
-            <div class="p-card">
-                <i class="fas fa-user-group p-icon"></i>
-                <div class="p-tags"><span class="p-tag">SOCIAL</span><span class="p-tag">API</span></div>
-                <h3>Spatial Voice Manager</h3>
-                <p>Advanced integration of Roblox Voice Chat API with proximity team filters and dynamic audio muffling through walls.</p>
-            </div>
-
-            <div class="p-card">
-                <i class="fas fa-code-branch p-icon"></i>
-                <div class="p-tags"><span class="p-tag">OOP</span><span class="p-tag">FRAMEWORK</span></div>
-                <h3>Modular Ability Core</h3>
-                <p>An abstract class system that allows developers to add new abilities in seconds with built-in cooldowns and VFX replication.</p>
-            </div>
-
         </div>
     </div>
 
-    <div class="chat-widget">
-        <div class="chat-header">
-            <span>DIRECT MESSAGING</span>
-            <i class="fas fa-minus" style="font-size: 10px; cursor: pointer;"></i>
+    <div class="support-row">
+        <div class="support-card">
+            <div>
+                <h2 style="margin:0">Let's Chat Real-Time</h2>
+                <p style="color: var(--dim); margin-top: 10px;">I'm currently active and responding to inquiries.</p>
+            </div>
+            <div class="live-status"><div style="width: 10px; height: 10px; background: #fff; border-radius: 50%;"></div> LIVE SUPPORT</div>
         </div>
-        <div class="chat-body" id="chatBox">
-            <div class="msg">Hi! I'm Blasianaww. Have a project in mind?</div>
-            <div class="msg">Send me a message and I'll get back to you via Discord.</div>
-        </div>
-        <div class="chat-input">
-            <input type="text" placeholder="Type your project idea..." id="chatInput">
-            <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+        <div class="about-box" style="text-align: center;">
+            <p style="color: var(--dim); font-size: 0.8rem; margin-bottom: 5px;">DISCORD TAG</p>
+            <h3 style="margin: 0;">blasianaww</h3>
         </div>
     </div>
 
-    <div class="contact-footer" id="contact">
-        <div class="f-item">
-            <h4>DISCORD IDENTITY</h4>
-            <p>blasianaww</p>
-        </div>
-        <div class="f-item">
-            <h4>BUSINESS EMAIL</h4>
-            <p>blasianaww.mainone@gmail.com</p>
-        </div>
-        <div class="f-item">
-            <h4>STATUS</h4>
-            <p style="color: var(--accent);">● ONLINE</p>
+    <div class="modal" id="pModal">
+        <div class="modal-content">
+            <h2 style="margin-bottom: 30px;">// START A PROJECT</h2>
+            <input type="text" id="mName" placeholder="Full Name">
+            <input type="text" id="mDiscord" placeholder="Discord Tag">
+            <textarea id="mDetails" rows="5" placeholder="What system do you need built?"></textarea>
+            <button class="submit-btn" onclick="submitProject()">SUBMIT INQUIRY <i class="fas fa-paper-plane"></i></button>
+            <p onclick="closeModal()" style="text-align: center; color: #444; margin-top: 20px; cursor: pointer;">CLOSE</p>
         </div>
     </div>
 
     <script>
-        function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const box = document.getElementById('chatBox');
-            if (input.value.trim() !== "") {
-                const newMsg = document.createElement('div');
-                newMsg.className = "msg me";
-                newMsg.innerText = input.value;
-                box.appendChild(newMsg);
-                input.value = "";
-                box.scrollTop = box.scrollHeight;
-                
-                // Fake automated response
-                setTimeout(() => {
-                    const reply = document.createElement('div');
-                    reply.className = "msg";
-                    reply.innerText = "Thanks! I've received that. Add me on Discord (blasianaww) to finalize the details.";
-                    box.appendChild(reply);
-                    box.scrollTop = box.scrollHeight;
-                }, 1000);
-            }
+        const hook = "https://discord.com/api/webhooks/1503019443066765454/RBObvj82k5jBOtD8wLAVX69DUtJ0H__MfP0NflOgcJBpKfHWBt-WxYQ6L26gY5WzLRa7";
+        
+        function openModal() { document.getElementById('pModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('pModal').style.display = 'none'; }
+
+        async function submitProject() {
+            const name = document.getElementById('mName').value;
+            const discord = document.getElementById('mDiscord').value;
+            const details = document.getElementById('mDetails').value;
+
+            const payload = {
+                content: `🚀 **URGENT PROJECT INQUIRY**\n**User:** ${name}\n**Discord:** ${discord}\n**Request:** ${details}`
+            };
+
+            await fetch(hook, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) });
+            alert("Sent! I'll contact you on Discord shortly.");
+            closeModal();
         }
     </script>
 
