@@ -3,176 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blasianaww | Roblox Systems Architect</title>
+    <title>Blasianaww | Roblox Systems Engineer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #00d2ff;
-            --bg: #050505;
-            --card: #111111;
-            --text: #ffffff;
-            --accent: #1e1e1e;
+            --bg: #080808;
+            --card: #121212;
+            --accent: #007aff;
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
+            --border: #222;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background-color: var(--bg);
-            color: var(--text);
+            color: var(--text-main);
             margin: 0;
-            scroll-behavior: smooth;
+            line-height: 1.6;
         }
 
-        .nav {
-            padding: 20px;
+        .navbar {
             display: flex;
             justify-content: space-between;
-            max-width: 1200px;
-            margin: auto;
-            font-weight: bold;
-            letter-spacing: 1px;
+            padding: 30px 10%;
+            align-items: center;
         }
+
+        .logo { font-weight: 900; font-size: 1.5rem; letter-spacing: -1px; }
+        .status { font-size: 0.8rem; background: rgba(0, 122, 255, 0.1); color: var(--accent); padding: 5px 15px; border-radius: 20px; border: 1px solid var(--accent); }
 
         header {
-            height: 70vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: radial-gradient(circle at center, #111 0%, #050505 100%);
+            padding: 100px 10% 50px 10%;
+            max-width: 800px;
         }
 
-        .hero-title { font-size: 5rem; margin: 0; letter-spacing: -3px; }
-        .hero-sub { color: #888; font-size: 1.2rem; margin-top: 10px; }
+        h1 { font-size: 4.5rem; margin: 0; letter-spacing: -4px; line-height: 1; }
+        .hero-desc { font-size: 1.25rem; color: var(--text-dim); margin-top: 20px; max-width: 600px; }
 
-        .container { max-width: 1100px; margin: auto; padding: 50px 20px; }
+        .section-label { color: var(--accent); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 20px; display: block; }
 
-        h2 { font-size: 2rem; margin-bottom: 40px; border-bottom: 1px solid var(--accent); padding-bottom: 10px; }
+        .container { padding: 50px 10%; }
 
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        /* Services Grid */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 80px; }
+        .service-card { background: var(--card); border: 1px solid var(--border); padding: 40px; border-radius: 24px; transition: 0.3s; }
+        .service-card i { font-size: 2rem; color: var(--accent); margin-bottom: 20px; }
+        .service-card h3 { margin: 0 0 10px 0; font-size: 1.5rem; }
+        .service-card p { color: var(--text-dim); margin: 0; }
 
-        .project-card {
-            background: var(--card);
-            border: 1px solid var(--accent);
-            border-radius: 20px;
-            padding: 30px;
-            transition: 0.3s;
+        /* Project Section */
+        .project-list { display: flex; flex-direction: column; gap: 40px; }
+        .project-item { 
+            display: flex; 
+            background: var(--card); 
+            border: 1px solid var(--border); 
+            border-radius: 30px; 
+            overflow: hidden;
+            transition: 0.4s;
         }
+        .project-item:hover { border-color: #444; transform: scale(1.01); }
+        .project-info { padding: 40px; flex: 1; }
+        .project-tag { font-size: 0.7rem; color: var(--accent); font-weight: bold; margin-bottom: 10px; display: block; }
 
-        .project-card:hover { border-color: var(--primary); transform: translateY(-5px); }
-
-        .tag-list { display: flex; gap: 10px; margin-top: 20px; }
-        .tag { background: #222; font-size: 0.7rem; padding: 5px 12px; border-radius: 5px; color: var(--primary); font-weight: bold; }
-
-        .code-snippet {
+        .code-box {
             background: #000;
             padding: 20px;
             border-radius: 15px;
             font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
             color: #72f1b8;
-            font-size: 0.85rem;
-            line-height: 1.5;
-            border: 1px solid var(--accent);
+            margin-top: 20px;
+            border: 1px solid #1a1a1a;
         }
 
-        .contact-section {
+        .cta-box {
+            background: linear-gradient(145deg, #111, #080808);
+            border: 1px solid var(--border);
+            padding: 80px;
+            border-radius: 40px;
             text-align: center;
-            padding: 100px 20px;
-            background: var(--card);
-            border-radius: 30px;
-            margin: 50px 0;
+            margin-top: 100px;
         }
 
-        .btn {
-            background: white;
-            color: black;
-            padding: 15px 40px;
+        .discord-btn {
+            background: var(--text-main);
+            color: var(--bg);
+            padding: 18px 45px;
+            border-radius: 40px;
             text-decoration: none;
-            border-radius: 50px;
             font-weight: bold;
+            display: inline-block;
+            margin-top: 30px;
             transition: 0.3s;
         }
+        .discord-btn:hover { background: var(--accent); color: white; }
 
-        .btn:hover { background: var(--primary); color: white; }
+        footer { padding: 50px 10%; text-align: center; color: var(--text-dim); font-size: 0.8rem; }
 
-        footer { text-align: center; padding: 50px; color: #444; }
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .cta-box { padding: 40px; }
+        }
     </style>
 </head>
 <body>
 
-<div class="nav">
-    <div>BLASIANAWW</div>
-    <div style="color: var(--primary)">AVAILABLE FOR WORK</div>
-</div>
+    <nav class="navbar">
+        <div class="logo">BLASIANAWW.</div>
+        <div class="status"><i class="fas fa-circle" style="font-size: 8px; margin-right: 8px;"></i> Accepting Commissions</div>
+    </nav>
 
-<header>
-    <h1 class="hero-title">BLASIANAWW</h1>
-    <p class="hero-sub">Specializing in high-performance gameplay frameworks & Luau architecture.</p>
-</header>
+    <header>
+        <span class="section-label">Systems & Architecture</span>
+        <h1>Building the future of Roblox.</h1>
+        <p class="hero-desc">I engineer high-performance game backends, modular frameworks, and seamless gameplay experiences for top-tier studios.</p>
+    </header>
 
-<div class="container">
-    
-    <h2>// PROOF OF WORK</h2>
-    <div class="project-grid">
-        <div class="project-card">
-            <h3>Custom Physics Engine</h3>
-            <p>Developed a server-authoritative vehicle physics system using Raycasting and body movers. Optimized to handle 20+ vehicles simultaneously with zero network jitter.</p>
-            <div class="tag-list">
-                <span class="tag">PHYSICS</span>
-                <span class="tag">OPTIMIZATION</span>
+    <div class="container">
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-microchip"></i>
+                <h3>Backend Logic</h3>
+                <p>Highly optimized Luau systems focusing on memory management and thread safety.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-database"></i>
+                <h3>Data Architecture</h3>
+                <p>Secure player data persistence using ProfileService and custom data-redundancy layers.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-shield-halved"></i>
+                <h3>Security</h3>
+                <p>Advanced server-side validation and anti-tamper remote event protocols.</p>
             </div>
         </div>
 
-        <div class="project-card">
-            <h3>Global Matchmaking Core</h3>
-            <p>Utilized MessagingService and MemoryStoreService to create a cross-server queue system with skill-based rating (ELO) and party persistence.</p>
-            <div class="tag-list">
-                <span class="tag">BACKEND</span>
-                <span class="tag">SCALABILITY</span>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <h3>Security & Anticheat</h3>
-            <p>Designed a modular "Anti-Exploit" suite focusing on walkspeed, flight detection, and remote event encryption/verification.</p>
-            <div class="tag-list">
-                <span class="tag">SECURITY</span>
-                <span class="tag">LUAU</span>
-            </div>
-        </div>
-    </div>
-
-    <h2 style="margin-top: 100px;">// TECHNICAL SAMPLE</h2>
-    <div class="code-snippet">
--- High-Performance Data Wrapper
-local DataService = {}
-local ProfileService = require(script.Parent.ProfileService)
-
-function DataService:Start()
-    self.Profiles = {}
-    print("Data Architecture Initialized...")
+        <span class="section-label">Proof of Work</span>
+        <div class="project-list">
+            
+            <div class="project-item">
+                <div class="project-info">
+                    <span class="project-tag">COMPLEX SYSTEM</span>
+                    <h3>Global Matchmaking Engine</h3>
+                    <p>A cross-server matchmaking system utilizing MemoryStoreService to group players based on hidden MMR, supporting parties and reconnect logic.</p>
+                    <div class="code-box">
+-- Secure Queue Registration
+function Matchmaking:JoinQueue(player, rating)
+    local success = MemoryStore:GetSortedMap("Queue"):SetAsync(player.UserId, rating, 3600)
+    return success
 end
+                    </div>
+                </div>
+            </div>
 
-function DataService:Load(player)
-    local profile = ProfileStore:LoadProfileAsync("Player_" .. player.UserId)
-    if profile then
-        profile:AddUserId(player.UserId)
-        self.Profiles[player] = profile
-    end
-end
+            <div class="project-item">
+                <div class="project-info">
+                    <span class="project-tag">FRAMEWORK</span>
+                    <h3>Modular Ability Framework</h3>
+                    <p>Built an OOP-based ability system that allows for rapid creation of new skills with built-in cooldown management, VFX replication, and hitboxes.</p>
+                </div>
+            </div>
 
-return DataService
-    </div>
+        </div>
 
-    <div class="contact-section">
-        <h2 style="border:none;">Interested in collaborating?</h2>
-        <p style="margin-bottom: 40px; color: #888;">Currently taking on high-budget commissions and long-term project leads.</p>
-        <a href="#" class="btn">Discord: blasianaww</a>
+        <div class="cta-box">
+            <h2>Let's create something legendary.</h2>
+            <p style="color: var(--text-dim)">Currently looking for Lead Programmer roles or high-end systems commissions.</p>
+            <a href="#" class="discord-btn"><i class="fab fa-discord"></i> Discord: blasianaww</a>
+        </div>
+
     </div>
 
     <footer>
-        &copy; 2026 Blasianaww. Built with Precision.
+        &copy; 2026 BLASIANAWW PORTFOLIO | ROBLOX TECHNICAL DIRECTOR
     </footer>
-</div>
 
 </body>
 </html>
