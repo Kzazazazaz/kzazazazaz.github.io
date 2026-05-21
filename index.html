@@ -3,170 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>blasianaww & porcusa | Premium Roblox Devs</title>
-    <link rel="stylesheet" href="style.css">
+    <title>blasianaww & porcusa | Roblox Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
 </head>
-<body>
+<body class="bg-[#0b0c10] text-white">
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">🛠️ blasianaww & porcusa<span>.dev</span></div>
-            <ul class="nav-links">
-                <li><a href="#home" class="active">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><button class="nav-btn btn-primary" onclick="toggleModal()">PROJECT FORM</button></li>
-            </ul>
+    <script>
+        // ==========================================
+        // UN6107617 TEMPLATE CONFIGURATION (MODIFIED FOR DUO)
+        // ==========================================
+        const CONFIG = {
+            displayName: "blasianaww & porcusa",
+            title: "Roblox Scripting & Environment Design Studio",
+            bio: "An agile development duo pushing the technical boundaries of Roblox. We focus on writing clean, scalable game frameworks and pairing them with high-fidelity, optimized map design.",
+            
+            // Primary Roblox User ID to pull dynamic avatar/games (Using blasianaww's ID or your preferred one)
+            robloxUserId: "1", // <-- Replace "1" with your real Roblox User ID to pull live items automatically!
+            
+            discordUsername: "blasianaww / porcusa",
+            contactEmail: "devs.blasian.porcusa@gmail.com",
+            
+            themeColor: "dark", 
+            accentHex: "#00bcd4", // Premium Cyan Accent Glow
+            
+            // Tech Stack Badges
+            techStack: [
+                "Luau Scripting", "DataStore Service", "Module Frameworks", 
+                "3D Environment Design", "Blender Modeling", "PBR Texturing", "Map Optimization"
+            ],
+            
+            // Custom Showcases (This mirrors the template's 'extraProjects' feature)
+            extraProjects: [
+                {
+                    title: "Advanced Combat & Sandbox Framework",
+                    description: "A massive scalable game framework featuring zero-latency custom netcode matchmakers, dynamic lobby tracking, and modular data containers optimized for large servers.",
+                    tags: ["Luau Scripting", "DataStore Service", "UI Architecture"],
+                    image: "https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?q=80&w=600"
+                },
+                {
+                    title: "Automotive Showroom & Environment Design",
+                    description: "High-fidelity, low-poly customized vehicle structures completely rigged and configured with PBR texturing and baked studio lighting presets.",
+                    tags: ["3D Modeling", "Blender", "Lighting Design"],
+                    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600"
+                }
+            ]
+        };
+
+        // ==========================================
+        // CORE TEMPLATE RENDER ENGINE
+        // ==========================================
+        document.addEventListener("DOMContentLoaded", () => {
+            // Render Profile Texts
+            document.getElementById("dev-title").innerText = CONFIG.title;
+            document.getElementById("dev-name").innerText = CONFIG.displayName;
+            document.getElementById("dev-bio").innerText = CONFIG.bio;
+            document.getElementById("discord-tag-1").innerText = "💬 Discord: " + CONFIG.discordUsername.split(" / ")[0];
+            document.getElementById("discord-tag-2").innerText = "💬 Discord: " + CONFIG.discordUsername.split(" / ")[1];
+            document.getElementById("dev-email").innerText = "📩 Email: " + CONFIG.contactEmail;
+
+            // Load Avatar Image via Caching Proxy API Layer
+            const avatarImg = document.getElementById("avatar-img");
+            avatarImg.src = `https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${CONFIG.robloxUserId}&size=150x150&format=Png&isCircular=true`;
+            avatarImg.onerror = () => { avatarImg.src = "https://tr.rbxcdn.com/30da87f195d85d774ef1a0ee520a7751/150/150/AvatarHeadshot/Png"; };
+
+            // Render Tech Stack
+            const techContainer = document.getElementById("tech-stack-container");
+            CONFIG.techStack.forEach(tech => {
+                const badge = document.createElement("span");
+                badge.className = "bg-[#181b26] border border-[#222636] text-gray-300 text-xs px-3 py-1.5 rounded-md font-medium shadow-sm";
+                badge.innerText = tech;
+                techContainer.appendChild(badge);
+            });
+
+            // Render Showcases
+            const showcaseContainer = document.getElementById("projects-container");
+            CONFIG.extraProjects.forEach(project => {
+                const card = document.createElement("div");
+                card.className = "bg-[#12141c] border border-[#222636] rounded-xl overflow-hidden transition-transform duration-200 hover:-translate-y-1 shadow-lg";
+                
+                let tagsHtml = project.tags.map(t => `<span class="bg-[#181b26] border border-[#222636] text-gray-400 text-[11px] px-2 py-1 rounded">${t}</span>`).join('');
+                
+                card.innerHTML = `
+                    <div class="h-48 w-full bg-cover bg-center" style="background-image: url('${project.image}')"></div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">${project.title}</h3>
+                        <p class="text-gray-400 text-sm mb-4 leading-relaxed">${project.description}</p>
+                        <div class="flex flex-wrap gap-2">${tagsHtml}</div>
+                    </div>
+                `;
+                showcaseContainer.appendChild(card);
+            });
+            
+            // Dynamic Grid Puller Simulation from template framework
+            fetch(`https://games.roblox.com/v2/users/${CONFIG.robloxUserId}/games?accessFilter=Public&limit=10`)
+                .then(res => res.json())
+                .then(data => {
+                    if(data && data.data && data.data.length > 0) {
+                        const liveHeader = document.getElementById("live-games-title");
+                        liveHeader.classList.remove("hidden");
+                        // Render logic would map icons here dynamically
+                    }
+                }).catch(e => console.log("Static Mode Active"));
+        });
+
+        function toggleModal() {
+            document.getElementById('projectModal').classList.toggle('hidden');
+            document.getElementById('projectModal').classList.toggle('flex');
+        }
+    </script>
+
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-gradient-to-b from-[rgba(0,188,212,0.12)] to-transparent rounded-full blur-3xl pointer-events-none"></div>
+
+    <nav class="fixed top-0 w-full bg-[#0b0c10]/80 backdrop-blur-xl border-b border-[#222636] z-50">
+        <div class="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
+            <div class="text-sm font-bold tracking-tight">🛠️ blasianaww & porcusa<span class="text-[#00bcd4]">.dev</span></div>
+            <button onclick="toggleModal()" class="bg-gradient-to-r from-[#00bcd4] to-[#8a2be2] text-xs font-bold px-4 py-2 rounded-md shadow-md hover:opacity-90 transition">PROJECT FORM</button>
         </div>
     </nav>
 
-    <header id="home" class="hero-section">
-        <div class="hero-glow"></div>
-        <div class="container hero-content">
-            <span class="badge">🚀 Ready for new projects in 2026</span>
-            <h1>Creating <span>Immersive</span> <br>Roblox Experiences</h1>
-            <p class="hero-subtitle">Specializing in high-performance Luau scripting, custom frameworks, and immersive 3D environment design in Roblox Studio.</p>
-            <div class="hero-actions">
-                <a href="#portfolio" class="btn btn-primary">View Our Work</a>
-                <button class="btn btn-secondary" onclick="toggleModal()">Start a Project</button>
-            </div>
-            
-            <div class="stats-row">
-                <div class="stat-card"><h3>4+</h3><p>Years Experience</p></div>
-                <div class="stat-card"><h3>Expert</h3><p>Scripting & Modeling</p></div>
-                <div class="stat-card"><h3>100%</h3><p>Reliability Rate</p></div>
-            </div>
+    <header class="pt-32 pb-16 text-center max-w-4xl mx-auto px-6 relative z-10">
+        <span class="inline-block bg-[#00bcd4]/10 border border-[#00bcd4]/20 text-[#00bcd4] text-xs font-semibold px-3 py-1 rounded-full mb-6">🚀 Ready for projects in 2026</span>
+        <div class="flex justify-center mb-6">
+            <img id="avatar-img" class="w-24 h-24 rounded-full border-2 border-[#00bcd4] shadow-lg bg-[#12141c]" src="" alt="Avatar">
+        </div>
+        <h1 id="dev-name" class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-3"></h1>
+        <p id="dev-title" class="text-lg text-gray-400 font-medium mb-4"></p>
+        <p id="dev-bio" class="text-sm text-gray-400 max-w-2xl mx-auto leading-relaxed mb-8"></p>
+        
+        <div class="flex justify-center gap-4">
+            <a href="#work" class="bg-gradient-to-r from-[#00bcd4] to-[#8a2be2] text-sm font-bold px-6 py-3 rounded-lg shadow-lg hover:scale-[1.02] transition">View Our Work</a>
+            <button onclick="toggleModal()" class="bg-transparent border border-[#222636] hover:bg-[#12141c] text-sm font-bold px-6 py-3 rounded-lg transition">Start a Project</button>
         </div>
     </header>
 
-    <section id="about" class="about-section">
-        <div class="container section-grid">
-            <div class="about-main">
-                <h2>About Us</h2>
-                <p>We are an agile development duo dedicated to pushing the technical boundaries of Roblox. We focus on writing clean, scalable game frameworks and pairing them with high-fidelity, optimized map design.</p>
-                <div class="meta-info-box">
-                    <div><strong>Availability</strong><span class="status-tag green">Full-time / Freelance</span></div>
-                    <div><strong>Response Time</strong><span class="status-tag blue">&lt; 24 Hours</span></div>
-                </div>
-            </div>
-            <div class="competencies-box">
-                <h2>Core Competencies</h2>
-                <div class="comp-grid">
-                    <div class="comp-item">⚡ <h4>Luau Scripting</h4><p>Advanced modular logic, secure server-client architectures, and fast data management.</p></div>
-                    <div class="comp-item">🎨 <h4>Environment Design</h4><p>Custom asset production using Blender with hand-crafted PBR materials and atmospheric maps.</p></div>
-                    <div class="comp-item">⚙️ <h4>Optimization</h4><p>Aggressive network compression, layout streaming configurations, and asset poly reduction.</p></div>
-                    <div class="comp-item">🛡️ <h4>Security</h4><p>Secure server verification checks engineered to prevent exploit execution.</p></div>
-                </div>
-            </div>
-        </div>
+    <section class="max-w-5xl mx-auto px-6 py-12 border-t border-[#222636]">
+        <h2 class="text-xl font-bold mb-6 flex items-center gap-2">🛠️ Competencies & Tech Stack</h2>
+        <div id="tech-stack-container" class="flex flex-wrap gap-2.5"></div>
     </section>
 
-    <section id="portfolio" class="portfolio-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Our Featured Work</h2>
-                <p>Explore recent projects scaling from comprehensive gameplay loops to stylized asset environments.</p>
-            </div>
-            <div class="portfolio-grid">
-                <div class="project-card">
-                    <div class="project-img p1-bg"><span>🎮 Systems Architecture</span></div>
-                    <div class="project-body">
-                        <h3>Advanced Combat & Sandbox Framework</h3>
-                        <p>A massive scalable framework featuring zero-latency custom netcode matchmakers, dynamic lobby tracking, and modular data containers optimized for large servers.</p>
-                        <div class="tech-tags">
-                            <span>Luau Scripting</span><span>DataStore Service</span><span>Custom Netcode</span><span>UI Design</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-img p2-bg"><span>🏎️ 3D Modeling</span></div>
-                    <div class="project-body">
-                        <h3>Automotive Showroom & Environment</h3>
-                        <p>High-fidelity, low-poly customized vehicle structures completely rigged and configured with PBR texturing and baked studio lighting presets.</p>
-                        <div class="tech-tags">
-                            <span>3D Modeling</span><span>Blender</span><span>PBR Texturing</span><span>Lighting Design</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <section id="work" class="max-w-5xl mx-auto px-6 py-12 border-t border-[#222636]">
+        <h2 class="text-xl font-bold mb-2">📂 Featured Showcases</h2>
+        <p class="text-xs text-gray-400 mb-8">Our core systems, environmental assemblies, and optimized asset libraries.</p>
+        <div id="projects-container" class="grid sm:grid-items grid-cols-1 sm:grid-cols-2 gap-6"></div>
+        <h2 id="live-games-title" class="text-xl font-bold mt-12 mb-6 hidden">🎮 Public Experiences</h2>
     </section>
 
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <div class="contact-box">
-                <div class="contact-left">
-                    <span class="badge blue-badge">Instant Response Available</span>
-                    <h2>Let's Chat Real-Time</h2>
-                    <p>Ready to build? Get directly in touch with our team across our verified platforms to get your quote configured instantly.</p>
-                    <div class="direct-handles">
-                        <p>📩 <strong>Direct Inquiries:</strong> devs.blasian.porcusa@gmail.com</p>
-                        <p>💬 <strong>Discord Developer:</strong> blasianaww</p>
-                        <p>💬 <strong>Discord Builder:</strong> porcusa</p>
-                    </div>
-                </div>
-                <div class="contact-right">
-                    <div class="live-status">
-                        <div class="pulse-indicator"></div>
-                        <span>Studio Online</span>
-                    </div>
-                    <h3>Launch Form</h3>
-                    <p>Start a comprehensive brief via our project workspace intake form.</p>
-                    <button class="btn btn-primary full-width" onclick="toggleModal()">Start Project Form ↗</button>
+    <section class="max-w-5xl mx-auto px-6 py-12 border-t border-[#222636]">
+        <div class="grid sm:grid-cols-2 gap-6 bg-[#12141c] border border-[#222636] rounded-2xl p-8 items-center">
+            <div>
+                <span class="inline-block bg-[#8a2be2]/10 border border-[#8a2be2]/20 text-[#b066ff] text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider mb-3">Instant Response Available</span>
+                <h2 class="text-2xl font-bold mb-2">Let's Chat Real-Time</h2>
+                <p class="text-sm text-gray-400 leading-relaxed mb-4">Ready to deploy your game mechanics? Reach out directly via our official channels below.</p>
+                <div class="space-y-1.5 text-sm font-medium text-gray-300">
+                    <p id="discord-tag-1"></p>
+                    <p id="discord-tag-2"></p>
+                    <p id="dev-email"></p>
                 </div>
             </div>
-            <footer class="site-footer">
-                <p>&copy; 2026 blasianaww & porcusa. All rights reserved. Secure & Optimized.</p>
-            </footer>
+            <div class="bg-[#181b26] p-6 rounded-xl border border-[#222636]">
+                <h3 class="font-bold mb-1">Launch Project Brief</h3>
+                <p class="text-xs text-gray-400 mb-4">Instantly outline your maps, deadlines, frameworks, and budgets inside our configuration form.</p>
+                <button onclick="toggleModal()" class="w-full bg-gradient-to-r from-[#00bcd4] to-[#8a2be2] text-xs font-bold py-3 rounded-lg shadow-md hover:opacity-90 transition">Start Project Form ↗</button>
+            </div>
         </div>
+        <footer class="text-center text-xs text-gray-500 mt-12">
+            &copy; 2026 blasianaww & porcusa. Built with Roblox Developer Portfolio Template by UN6107617.
+        </footer>
     </section>
 
-    <div id="projectModal" class="modal-overlay">
-        <div class="modal-box">
-            <div class="modal-header">
-                <h3>📋 Project Inquiry Brief</h3>
-                <span class="close-btn" onclick="toggleModal()">&times;</span>
-            </div>
-            <form class="modal-form" onsubmit="event.preventDefault(); alert('Inquiry Simulation: Form successfully processed!'); toggleModal();">
-                <div class="form-row">
-                    <div class="form-group"><label>Full Name</label><input type="text" placeholder="John Doe" required></div>
-                    <div class="form-group"><label>Email Address</label><input type="email" placeholder="john@example.com" required></div>
-                </div>
-                <div class="form-group"><label>Project Type</label><input type="text" placeholder="e.g. Simulator, RPG System, Combat Framework" required></div>
-                <div class="form-row">
-                    <div class="form-group"><label>Budget Range</label><input type="text" placeholder="e.g. 50,000 Robux / $500 USD"></div>
-                    <div class="form-group"><label>Deadline</label><input type="date"></div>
-                </div>
-                <div class="form-group"><label>Project Details</label><textarea rows="4" placeholder="Describe your game systems, structural assets, loops, or custom mechanics..." required></textarea></div>
-                <button type="submit" class="btn btn-primary full-width">Submit Project Inquiry 🚀</button>
-            </form>
-        </div>
-    </div>
-
-    <script>
-        function toggleModal() {
-            const modal = document.getElementById('projectModal');
-            modal.classList.toggle('active');
-        }
-        
-        window.addEventListener('scroll', () => {
-            let current = '';
-            const sections = document.querySelectorAll('header, section');
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 120) {
-                    current = section.getAttribute('id');
-                }
-            });
-            document.querySelectorAll('.nav-links a').forEach(a => {
-                a.classList.remove('active');
-                if (a.getAttribute('href').includes(current)) {
-                    a.classList.add('active');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+    <div id="projectModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="bg-[#12141c] border border-[#222636] w-full max-w-lg rounded-xl overflow-hidden shadow-2xl">
