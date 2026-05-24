@@ -81,58 +81,32 @@
         .sec-title { font-size: 1.8rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 40px; display: flex; align-items: center; gap: 15px; text-transform: uppercase; }
         .sec-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-        /* --- Visual Showcases (Actual Uploaded Project Screenshots) --- */
-        .showroom-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 25px;
-            margin-bottom: 100px;
-        }
-        .showroom-item {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-            transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            aspect-ratio: 16 / 10;
+        /* --- Integrated Project Frames (Image + Text Inside Single Card) --- */
+        .p-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        .p-card { 
+            background: var(--card); border: 1px solid var(--border); border-radius: 24px; 
+            position: relative; transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); overflow: hidden;
+            display: flex; flex-direction: column; justify-content: space-between;
             cursor: pointer;
         }
-        .showroom-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        .p-card:hover { border-color: var(--accent); transform: translateY(-5px); background: var(--card-hover); box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px rgba(0,162,255,0.1); }
+        
+        /* Frame Image Container */
+        .p-frame-img {
+            width: 100%; aspect-ratio: 16 / 10; overflow: hidden;
+            border-bottom: 1px solid var(--border); background: #050507; position: relative;
         }
-        .showroom-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(to top, rgba(3,3,3,0.95) 15%, rgba(3,3,3,0.2) 60%, transparent);
-            display: flex; flex-direction: column; justify-content: flex-end;
-            padding: 25px; opacity: 0; transition: 0.3s ease;
-        }
-        .showroom-item:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.6), 0 0 15px rgba(0,162,255,0.1);
-        }
-        .showroom-item:hover img { transform: scale(1.05); }
-        .showroom-item:hover .showroom-overlay { opacity: 1; }
-        .showroom-overlay h4 { margin: 0 0 5px 0; font-size: 1.1rem; font-weight: 800; }
-        .showroom-overlay p { margin: 0; font-size: 0.8rem; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-
-        /* --- Custom Authentic Project Cards --- */
-        .p-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
-        .p-card { 
-            background: var(--card); border: 1px solid var(--border); border-radius: 20px; 
-            padding: 35px; position: relative; transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1); overflow: hidden;
-            display: flex; flex-direction: column; justify-content: space-between;
-        }
-        .p-card:hover { border-color: var(--accent); transform: translateY(-5px); background: var(--card-hover); box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
-        .p-tags { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+        .p-frame-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .p-card:hover .p-frame-img img { transform: scale(1.04); }
+        
+        /* Frame Text Details */
+        .p-details { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .p-tags { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
         .p-tag { font-size: 0.6rem; font-weight: 800; background: rgba(0,162,255,0.08); color: var(--accent); padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(0,162,255,0.15); text-transform: uppercase; letter-spacing: 0.5px; }
-        .p-card h3 { font-size: 1.35rem; margin: 0 0 12px 0; letter-spacing: -0.5px; font-weight: 800; }
+        .p-card h3 { font-size: 1.35rem; margin: 0 0 12px 0; letter-spacing: -0.5px; font-weight: 800; color: #fff; }
         .p-card p { color: var(--dim); font-size: 0.88rem; line-height: 1.6; margin: 0 0 25px 0; }
-        .p-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; font-weight: 900; color: #44444f; text-transform: uppercase; letter-spacing: 1px; border-top: 1px solid var(--border); padding-top: 15px; }
+        
+        .p-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; font-weight: 900; color: #44444f; text-transform: uppercase; letter-spacing: 1px; border-top: 1px solid var(--border); padding-top: 15px; margin-top: auto; }
         .p-card:hover .p-footer { color: var(--dim); border-color: rgba(255,255,255,0.05); }
 
         /* --- Inquiry / Commission Modal --- */
@@ -207,7 +181,7 @@
             .form-row { flex-direction: column; gap: 0; }
             .modal-content { width: 95%; padding: 25px; }
             .chat-box { width: 90%; right: 5%; bottom: 15px; }
-            .showroom-grid { grid-template-columns: 1fr; }
+            .p-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -216,7 +190,6 @@
     <nav>
         <div class="logo">BLASIANAWW<span>.STUDIO</span></div>
         <div class="nav-links">
-            <a href="#showroom">Showroom Map</a>
             <a href="#specifications">Project Index</a>
             <button onclick="openModal()" class="project-form-btn">DISCORD BOOKING</button>
         </div>
@@ -227,126 +200,133 @@
         <h1>ROBLOX LEVEL<br><span>DESIGN & BUILDS</span></h1>
         <p class="hero-p">We prioritize precision Studs-style structuring, modular map geometry, and heavily instanced asset placement for seamless performance across all platforms.</p>
         <div class="btn-group">
-            <button onclick="document.getElementById('showroom').scrollIntoView();" class="btn btn-blue">Open Showroom <i class="fas fa-eye"></i></button>
+            <button onclick="document.getElementById('specifications').scrollIntoView();" class="btn btn-blue">Explore Commissions <i class="fas fa-hammer"></i></button>
             <button onclick="openModal()" class="btn btn-outline">Start Discord Order</button>
         </div>
     </header>
 
     <div class="stats">
         <div class="stat"><h3>4+</h3><p>Years Studio Build Exp</p></div>
-        <div class="stat"><h3>9+</h3><p>Verified Builds Loaded</p></div>
+        <div class="stat"><h3>8+</h3><p>Verified Layouts Loaded</p></div>
         <div class="stat"><h3>100%</h3><p>Optimized Studs Alignment</p></div>
-    </div>
-
-    <div class="container" id="showroom">
-        <div class="sec-title">// Active Visual Showroom</div>
-        <div class="showroom-grid">
-            <div class="showroom-item" onclick="openLightbox('Screenshot_2026-05-24_161631.jpg')">
-                <img src="Screenshot_2026-05-24_161631.jpg" alt="Roblox Build Element">
-                <div class="showroom-overlay"><h4>Exhibition Hub View</h4><p>Spatial Architecture</p></div>
-            </div>
-            <div class="showroom-item" onclick="openLightbox('Screenshot_2026-05-24_161656.jpg')">
-                <img src="Screenshot_2026-05-24_161656.jpg" alt="Roblox Build Element">
-                <div class="showroom-overlay"><h4>Atmospheric Zone</h4><p>Lighting & Staging</p></div>
-            </div>
-            <div class="showroom-item" onclick="openLightbox('Screenshot_2026-05-24_161703.jpg')">
-                <img src="Screenshot_2026-05-24_161703.jpg" alt="Roblox Build Element">
-                <div class="showroom-overlay"><h4>Structural Framework</h4><p>Modular Assets</p></div>
-            </div>
-            <div class="showroom-item" onclick="openLightbox('Screenshot_2026-05-24_161707.jpg')">
-                <img src="Screenshot_2026-05-24_161707.jpg" alt="Roblox Build Element">
-                <div class="showroom-overlay"><h4>Isometric Grid Build</h4><p>Level Layout</p></div>
-            </div>
-            <div class="showroom-item" onclick="openLightbox('Screenshot_2026-05-24_161712.jpg')">
-                <img src="Screenshot_2026-05-24_161712.jpg" alt="Roblox Build Element">
-                <div class="showroom-overlay"><h4>Symmetrical Gateway</h4><p>Hub Infrastructure</p></div>
-            </div>
-            <div class="showroom-item" onclick="openLightbox('Screenshot_2026-05-24_161753.jpg')">
-                <img src="Screenshot_2026-05-24_161753.jpg" alt="Roblox Build Element">
-                <div class="showroom-overlay"><h4>Thematic Arena Staging</h4><p>World Spacing</p></div>
-            </div>
-            <div class="showroom-item" onclick="openLightbox('Screenshot_2026-05-24_161913.jpg')">
-                <img src="Screenshot_2026-05-24_161913.jpg" alt="Roblox Build Element">
-                <div class="showroom-overlay"><h4>Natural Terrain Flow</h4><p>Topography Integration</p></div>
-            </div>
-            <div class="showroom-item" onclick="openLightbox('Screenshot_2026-05-24_162319.jpg')">
-                <img src="Screenshot_2026-05-24_162319.jpg" alt="Roblox Build Element">
-                <div class="showroom-overlay"><h4>Modular Corridor Cluster</h4><p>Interior Engineering</p></div>
-            </div>
-            <div class="showroom-item" onclick="openLightbox('Screenshot_2026-05-24_162405.jpg')">
-                <img src="Screenshot_2026-05-24_162405.jpg" alt="Roblox Build Element">
-                <div class="showroom-overlay"><h4>High-Fidelity Complex</h4><p>Premium Commission</p></div>
-            </div>
-        </div>
     </div>
 
     <div class="container" id="specifications">
         <div class="sec-title">// Layout Specifications Index</div>
         <div class="p-grid">
-            <div class="p-card">
-                <div>
-                    <div class="p-tags"><span class="p-tag">LOW POLY</span><span class="p-tag">LOBBY</span></div>
-                    <h3>Symmetrical Skyway Hub</h3>
-                    <p>Designed this floating lobby around a perfectly balanced snap-to-grid foundation. Features hand-placed trim sheets, geometric steps, and localized teleporters optimized to prevent memory leaks during high player loads.</p>
+            
+            <div class="p-card" onclick="openLightbox('Screenshot_2026-05-24_161631.jpg')">
+                <div class="p-frame-img">
+                    <img src="Screenshot_2026-05-24_161631.jpg" alt="Symmetrical Skyway Hub Preview">
                 </div>
-                <div class="p-footer"><span>ID: BUILD_01</span><span style="color:var(--accent);">Active Exhibit</span></div>
-            </div>
-            <div class="p-card">
-                <div>
-                    <div class="p-tags"><span class="p-tag">TERRAIN</span><span class="p-tag">CAVE</span></div>
-                    <h3>Glacial Cavern Deep-Zone</h3>
-                    <p>An organic cavern world showcasing customized voxel configurations. Blends ice-sheet parts with glowing neon crystal deposits, carefully partitioned into separate streaming sections to run flawlessly on mobile hardware.</p>
+                <div class="p-details">
+                    <div>
+                        <div class="p-tags"><span class="p-tag">LOW POLY</span><span class="p-tag">LOBBY</span></div>
+                        <h3>Symmetrical Skyway Hub</h3>
+                        <p>Designed this floating lobby around a perfectly balanced snap-to-grid foundation. Features hand-placed trim sheets, geometric steps, and localized teleporters optimized to prevent memory leaks during high player loads.</p>
+                    </div>
+                    <div class="p-footer"><span>ID: BUILD_01</span><span style="color:var(--accent);"><i class="fas fa-expand-alt"></i> View Full Frame</span></div>
                 </div>
-                <div class="p-footer"><span>ID: BUILD_02</span><span style="color:var(--accent);">Active Exhibit</span></div>
             </div>
-            <div class="p-card">
-                <div>
-                    <div class="p-tags"><span class="p-tag">STYLIZED</span><span class="p-tag">FANTASY</span></div>
-                    <h3>Windmill Meadow Spawn</h3>
-                    <p>A bright, stylized starter region focused heavily on performance. Built using customized low-poly grass clumps, custom-modeled windmills, and modular rocky steps that line the map boundary lines cleanly.</p>
+
+            <div class="p-card" onclick="openLightbox('Screenshot_2026-05-24_161656.jpg')">
+                <div class="p-frame-img">
+                    <img src="Screenshot_2026-05-24_161656.jpg" alt="Glacial Cavern Deep-Zone Preview">
                 </div>
-                <div class="p-footer"><span>ID: BUILD_03</span><span style="color:var(--accent);">Active Exhibit</span></div>
-            </div>
-            <div class="p-card">
-                <div>
-                    <div class="p-tags"><span class="p-tag">SCI-FI</span><span class="p-tag">INTERIOR</span></div>
-                    <h3>Hangar Bay Command Core</h3>
-                    <p>An industrial interior bay relying on custom plate patterns and heavy structural girders. The lighting profile is tuned with advanced shadow mapping and volumetric atmospheric points to create dense structural depth.</p>
+                <div class="p-details">
+                    <div>
+                        <div class="p-tags"><span class="p-tag">TERRAIN</span><span class="p-tag">CAVE</span></div>
+                        <h3>Glacial Cavern Deep-Zone</h3>
+                        <p>An organic cavern world showcasing customized voxel configurations. Blends ice-sheet parts with glowing neon crystal deposits, carefully partitioned into separate streaming sections to run flawlessly on mobile hardware.</p>
+                    </div>
+                    <div class="p-footer"><span>ID: BUILD_02</span><span style="color:var(--accent);"><i class="fas fa-expand-alt"></i> View Full Frame</span></div>
                 </div>
-                <div class="p-footer"><span>ID: BUILD_04</span><span style="color:var(--accent);">Active Exhibit</span></div>
             </div>
-            <div class="p-card">
-                <div>
-                    <div class="p-tags"><span class="p-tag">STYLIZED</span><span class="p-tag">DUNGEON</span></div>
-                    <h3>Ancient Citadel Gates</h3>
-                    <p>A brick-by-brick fort entrance balancing high texture fidelity with a strict part budget. Integrates secure stone-arch layouts, iron gate details, and multi-layered bridge routes perfect for combat-oriented map balancing.</p>
+
+            <div class="p-card" onclick="openLightbox('Screenshot_2026-05-24_161703.jpg')">
+                <div class="p-frame-img">
+                    <img src="Screenshot_2026-05-24_161703.jpg" alt="Windmill Meadow Spawn Preview">
                 </div>
-                <div class="p-footer"><span>ID: BUILD_05</span><span style="color:var(--accent);">Active Exhibit</span></div>
-            </div>
-            <div class="p-card">
-                <div>
-                    <div class="p-tags"><span class="p-tag">SIMULATOR</span><span class="p-tag">WORLD</span></div>
-                    <h3>Voxel Block Valley</h3>
-                    <p>The perfect multi-zone simulator blueprint built entirely on Studs-style progression. Organized with clean layout lanes, clear zone fences, and spacious currency chest zones styled for smooth player flow.</p>
+                <div class="p-details">
+                    <div>
+                        <div class="p-tags"><span class="p-tag">STYLIZED</span><span class="p-tag">FANTASY</span></div>
+                        <h3>Windmill Meadow Spawn</h3>
+                        <p>A bright, stylized starter region focused heavily on performance. Built using customized low-poly grass clumps, custom-modeled windmills, and modular rocky steps that line the map boundary lines cleanly.</p>
+                    </div>
+                    <div class="p-footer"><span>ID: BUILD_03</span><span style="color:var(--accent);"><i class="fas fa-expand-alt"></i> View Full Frame</span></div>
                 </div>
-                <div class="p-footer"><span>ID: BUILD_06</span><span style="color:var(--accent);">Active Exhibit</span></div>
             </div>
-            <div class="p-card">
-                <div>
-                    <div class="p-tags"><span class="p-tag">MINI-GAME</span><span class="p-tag">ARENA</span></div>
-                    <h3>Neon Colosseum Map</h3>
-                    <p>A dynamic, competitive PVP arena engineered with a tight grid framework. Built with symmetrical spawn platforms, ramp configurations, and drop-down rings to ensure fair, highly competitive level play.</p>
+
+            <div class="p-card" onclick="openLightbox('Screenshot_2026-05-24_161707.jpg')">
+                <div class="p-frame-img">
+                    <img src="Screenshot_2026-05-24_161707.jpg" alt="Hangar Bay Command Core Preview">
                 </div>
-                <div class="p-footer"><span>ID: BUILD_07</span><span style="color:var(--accent);">Active Exhibit</span></div>
-            </div>
-            <div class="p-card">
-                <div>
-                    <div class="p-tags"><span class="p-tag">HUB</span><span class="p-tag">PLAZA</span></div>
-                    <h3>Central Fountain Courtyard</h3>
-                    <p>A town square hub setup designed to act as a main server plaza. Framed around a central multi-tier fountain asset, surrounded by modular storefront facades and foliage layers for trading groups.</p>
+                <div class="p-details">
+                    <div>
+                        <div class="p-tags"><span class="p-tag">SCI-FI</span><span class="p-tag">INTERIOR</span></div>
+                        <h3>Hangar Bay Command Core</h3>
+                        <p>An industrial interior bay relying on custom plate patterns and heavy structural girders. The lighting profile is tuned with advanced shadow mapping and volumetric atmospheric points to create dense structural depth.</p>
+                    </div>
+                    <div class="p-footer"><span>ID: BUILD_04</span><span style="color:var(--accent);"><i class="fas fa-expand-alt"></i> View Full Frame</span></div>
                 </div>
-                <div class="p-footer"><span>ID: BUILD_08</span><span style="color:var(--accent);">Active Exhibit</span></div>
             </div>
+
+            <div class="p-card" onclick="openLightbox('Screenshot_2026-05-24_161712.jpg')">
+                <div class="p-frame-img">
+                    <img src="Screenshot_2026-05-24_161712.jpg" alt="Ancient Citadel Gates Preview">
+                </div>
+                <div class="p-details">
+                    <div>
+                        <div class="p-tags"><span class="p-tag">STYLIZED</span><span class="p-tag">DUNGEON</span></div>
+                        <h3>Ancient Citadel Gates</h3>
+                        <p>A brick-by-brick fort entrance balancing high texture fidelity with a strict part budget. Integrates secure stone-arch layouts, iron gate details, and multi-layered bridge routes perfect for combat-oriented map balancing.</p>
+                    </div>
+                    <div class="p-footer"><span>ID: BUILD_05</span><span style="color:var(--accent);"><i class="fas fa-expand-alt"></i> View Full Frame</span></div>
+                </div>
+            </div>
+
+            <div class="p-card" onclick="openLightbox('Screenshot_2026-05-24_161753.jpg')">
+                <div class="p-frame-img">
+                    <img src="Screenshot_2026-05-24_161753.jpg" alt="Voxel Block Valley Preview">
+                </div>
+                <div class="p-details">
+                    <div>
+                        <div class="p-tags"><span class="p-tag">SIMULATOR</span><span class="p-tag">WORLD</span></div>
+                        <h3>Voxel Block Valley</h3>
+                        <p>The perfect multi-zone simulator blueprint built entirely on Studs-style progression. Organized with clean layout lanes, clear zone fences, and spacious currency chest zones styled for smooth player flow.</p>
+                    </div>
+                    <div class="p-footer"><span>ID: BUILD_06</span><span style="color:var(--accent);"><i class="fas fa-expand-alt"></i> View Full Frame</span></div>
+                </div>
+            </div>
+
+            <div class="p-card" onclick="openLightbox('Screenshot_2026-05-24_161913.jpg')">
+                <div class="p-frame-img">
+                    <img src="Screenshot_2026-05-24_161913.jpg" alt="Neon Colosseum Map Preview">
+                </div>
+                <div class="p-details">
+                    <div>
+                        <div class="p-tags"><span class="p-tag">MINI-GAME</span><span class="p-tag">ARENA</span></div>
+                        <h3>Neon Colosseum Map</h3>
+                        <p>A dynamic, competitive PVP arena engineered with a tight grid framework. Built with symmetrical spawn platforms, ramp configurations, and drop-down rings to ensure fair, highly competitive level play.</p>
+                    </div>
+                    <div class="p-footer"><span>ID: BUILD_07</span><span style="color:var(--accent);"><i class="fas fa-expand-alt"></i> View Full Frame</span></div>
+                </div>
+            </div>
+
+            <div class="p-card" onclick="openLightbox('Screenshot_2026-05-24_162319.jpg')">
+                <div class="p-frame-img">
+                    <img src="Screenshot_2026-05-24_162319.jpg" alt="Central Fountain Courtyard Preview">
+                </div>
+                <div class="p-details">
+                    <div>
+                        <div class="p-tags"><span class="p-tag">HUB</span><span class="p-tag">PLAZA</span></div>
+                        <h3>Central Fountain Courtyard</h3>
+                        <p>A town square hub setup designed to act as a main server plaza. Framed around a central multi-tier fountain asset, surrounded by modular storefront facades and foliage layers for trading groups.</p>
+                    </div>
+                    <div class="p-footer"><span>ID: BUILD_08</span><span style="color:var(--accent);"><i class="fas fa-expand-alt"></i> View Full Frame</span></div>
+                </div>
+            </div>
+
         </div>
     </div>
 
