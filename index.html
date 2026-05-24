@@ -3,177 +3,322 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>blasianaww & porcusa | Roblox Developer Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>BLASIANAWW | Environmental Architect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        :root {
+            --bg: #050505;
+            --card: #0c0c0c;
+            --accent: #00a2ff;
+            --text: #ffffff;
+            --dim: #888;
+            --border: #1a1a1a;
+            --input: #0f0f0f;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 8%; position: sticky; top: 0;
+            background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(15px);
+            z-index: 1000; border-bottom: 1px solid var(--border);
+        }
+        .logo { font-weight: 900; font-size: 1.2rem; letter-spacing: -1px; }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { color: var(--dim); text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: var(--text); }
+        .project-form-btn { background: var(--accent); color: white !important; padding: 10px 20px; border-radius: 8px; font-weight: 800; cursor: pointer; }
+
+        /* --- Hero --- */
+        header {
+            padding: 150px 10% 80px; text-align: center;
+            background: radial-gradient(circle at 50% 0%, #111, #050505);
+        }
+        .h-badge { color: var(--accent); border: 1px solid var(--accent); padding: 6px 15px; border-radius: 30px; font-size: 0.7rem; font-weight: 900; letter-spacing: 1px; }
+        h1 { font-size: 5.5rem; letter-spacing: -4px; margin: 30px 0; line-height: 0.9; text-transform: uppercase; }
+        h1 span { color: var(--accent); }
+        .hero-p { color: var(--dim); font-size: 1.2rem; max-width: 650px; margin: 0 auto 50px; }
+        .btn-group { display: flex; justify-content: center; gap: 15px; }
+        .btn { padding: 16px 35px; border-radius: 10px; text-decoration: none; font-weight: 800; transition: 0.3s; cursor: pointer; }
+        .btn-blue { background: var(--accent); color: white; border: none; }
+        .btn-outline { border: 1px solid var(--border); color: white; background: transparent; }
+
+        /* --- Stats --- */
+        .stats { display: flex; justify-content: center; gap: 100px; padding: 60px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 0 10% 100px; }
+        .stat h3 { font-size: 2.2rem; margin: 0; font-weight: 900; }
+        .stat p { font-size: 0.7rem; color: var(--dim); text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; }
+
+        /* --- About & Core Focus --- */
+        .main-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; padding: 0 10% 100px; }
+        .about-card { background: var(--card); border: 1px solid var(--border); padding: 40px; border-radius: 20px; }
+        .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .comp-item { background: var(--card); border: 1px solid var(--border); padding: 25px; border-radius: 15px; }
+        .comp-item i { color: var(--accent); font-size: 1.4rem; margin-bottom: 15px; }
+
+        /* --- Projects Grid --- */
+        .container { padding: 0 10% 100px; }
+        .p-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .p-card { 
+            background: var(--card); border: 1px solid var(--border); border-radius: 20px; 
+            padding: 35px; position: relative; transition: 0.3s; overflow: hidden;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .p-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .p-tags { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; }
+        .p-tag { font-size: 0.6rem; font-weight: 800; background: rgba(0,162,255,0.1); color: var(--accent); padding: 4px 10px; border-radius: 4px; border: 1px solid rgba(0,162,255,0.1); }
+        .p-card h3 { font-size: 1.3rem; margin: 0 0 12px 0; letter-spacing: -0.5px; }
+        .p-card p { color: var(--dim); font-size: 0.85rem; line-height: 1.6; margin-bottom: 20px; }
+        .p-footer { font-size: 0.7rem; font-weight: 900; color: #333; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- Inquiry Modal --- */
+        .modal { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.9); backdrop-filter: blur(8px);
+            z-index: 5000; display: none; justify-content: center; align-items: center; 
+        }
+        .modal-content { 
+            background: var(--card); width: 600px; padding: 40px; border-radius: 24px; 
+            border: 1px solid var(--border);
+        }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .modal-header h2 { margin: 0; font-size: 1.2rem; font-weight: 900; display: flex; align-items: center; gap: 10px; }
+        .close-modal { cursor: pointer; color: var(--dim); font-size: 1.5rem; }
+        
+        .form-row { display: flex; gap: 20px; margin-bottom: 20px; }
+        .form-group { flex: 1; }
+        .form-group label { display: block; font-size: 0.65rem; font-weight: 800; color: var(--dim); margin-bottom: 10px; text-transform: uppercase; }
+        .modal input, .modal textarea, .modal select { 
+            width: 100%; background: var(--input); border: 1px solid var(--border); 
+            color: white; padding: 15px; border-radius: 10px; outline: none; box-sizing: border-box;
+        }
+        .submit-btn { 
+            width: 100%; background: var(--accent); color: white; padding: 18px; 
+            border-radius: 12px; border: none; font-weight: 900; cursor: pointer; 
+            margin-top: 20px; font-size: 1rem;
+        }
+
+        /* --- Chat Widget --- */
+        .chat-box {
+            position: fixed; bottom: 30px; right: 30px; width: 350px;
+            background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+            z-index: 4000; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .chat-head { background: var(--accent); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 0.8rem; }
+        .chat-body { height: 250px; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .m-them { background: #1a1a1a; padding: 10px 15px; border-radius: 12px; font-size: 0.85rem; align-self: flex-start; }
+        .m-me { background: var(--accent); padding: 10px 15px; border-radius: 12px; font-size: 0.85rem; align-self: flex-end; }
+        .chat-input { padding: 15px; border-top: 1px solid var(--border); display: flex; gap: 10px; }
+        .chat-input input { background: #000; border: 1px solid var(--border); color: white; padding: 10px; flex: 1; border-radius: 8px; outline: none; }
+
+        @media (max-width: 900px) { h1 { font-size: 3rem; } .main-grid, .stats { grid-template-columns: 1fr; flex-direction: column; gap: 30px; } .modal-content { width: 90%; } }
     </style>
 </head>
-<body class="bg-[#0b0c10] text-white">
+<body>
 
-    <script>
-        // ==========================================
-        // UN6107617 TEMPLATE CONFIGURATION (MODIFIED FOR DUO)
-        // ==========================================
-        const CONFIG = {
-            displayName: "blasianaww & porcusa",
-            title: "Roblox Scripting & Environment Design Studio",
-            bio: "An agile development duo pushing the technical boundaries of Roblox. We focus on writing clean, scalable game frameworks and pairing them with high-fidelity, optimized map design.",
-            
-            // Primary Roblox User ID to pull dynamic avatar/games (Using blasianaww's ID or your preferred one)
-            robloxUserId: "1", // <-- Replace "1" with your real Roblox User ID to pull live items automatically!
-            
-            discordUsername: "blasianaww / porcusa",
-            contactEmail: "devs.blasian.porcusa@gmail.com",
-            
-            themeColor: "dark", 
-            accentHex: "#00bcd4", // Premium Cyan Accent Glow
-            
-            // Tech Stack Badges
-            techStack: [
-                "Luau Scripting", "DataStore Service", "Module Frameworks", 
-                "3D Environment Design", "Blender Modeling", "PBR Texturing", "Map Optimization"
-            ],
-            
-            // Custom Showcases (This mirrors the template's 'extraProjects' feature)
-            extraProjects: [
-                {
-                    title: "Advanced Combat & Sandbox Framework",
-                    description: "A massive scalable game framework featuring zero-latency custom netcode matchmakers, dynamic lobby tracking, and modular data containers optimized for large servers.",
-                    tags: ["Luau Scripting", "DataStore Service", "UI Architecture"],
-                    image: "https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?q=80&w=600"
-                },
-                {
-                    title: "Automotive Showroom & Environment Design",
-                    description: "High-fidelity, low-poly customized vehicle structures completely rigged and configured with PBR texturing and baked studio lighting presets.",
-                    tags: ["3D Modeling", "Blender", "Lighting Design"],
-                    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600"
-                }
-            ]
-        };
-
-        // ==========================================
-        // CORE TEMPLATE RENDER ENGINE
-        // ==========================================
-        document.addEventListener("DOMContentLoaded", () => {
-            // Render Profile Texts
-            document.getElementById("dev-title").innerText = CONFIG.title;
-            document.getElementById("dev-name").innerText = CONFIG.displayName;
-            document.getElementById("dev-bio").innerText = CONFIG.bio;
-            document.getElementById("discord-tag-1").innerText = "💬 Discord: " + CONFIG.discordUsername.split(" / ")[0];
-            document.getElementById("discord-tag-2").innerText = "💬 Discord: " + CONFIG.discordUsername.split(" / ")[1];
-            document.getElementById("dev-email").innerText = "📩 Email: " + CONFIG.contactEmail;
-
-            // Load Avatar Image via Caching Proxy API Layer
-            const avatarImg = document.getElementById("avatar-img");
-            avatarImg.src = `https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${CONFIG.robloxUserId}&size=150x150&format=Png&isCircular=true`;
-            avatarImg.onerror = () => { avatarImg.src = "https://tr.rbxcdn.com/30da87f195d85d774ef1a0ee520a7751/150/150/AvatarHeadshot/Png"; };
-
-            // Render Tech Stack
-            const techContainer = document.getElementById("tech-stack-container");
-            CONFIG.techStack.forEach(tech => {
-                const badge = document.createElement("span");
-                badge.className = "bg-[#181b26] border border-[#222636] text-gray-300 text-xs px-3 py-1.5 rounded-md font-medium shadow-sm";
-                badge.innerText = tech;
-                techContainer.appendChild(badge);
-            });
-
-            // Render Showcases
-            const showcaseContainer = document.getElementById("projects-container");
-            CONFIG.extraProjects.forEach(project => {
-                const card = document.createElement("div");
-                card.className = "bg-[#12141c] border border-[#222636] rounded-xl overflow-hidden transition-transform duration-200 hover:-translate-y-1 shadow-lg";
-                
-                let tagsHtml = project.tags.map(t => `<span class="bg-[#181b26] border border-[#222636] text-gray-400 text-[11px] px-2 py-1 rounded">${t}</span>`).join('');
-                
-                card.innerHTML = `
-                    <div class="h-48 w-full bg-cover bg-center" style="background-image: url('${project.image}')"></div>
-                    <div class="p-6">
-                        <h3 class="text-lg font-bold text-white mb-2">${project.title}</h3>
-                        <p class="text-gray-400 text-sm mb-4 leading-relaxed">${project.description}</p>
-                        <div class="flex flex-wrap gap-2">${tagsHtml}</div>
-                    </div>
-                `;
-                showcaseContainer.appendChild(card);
-            });
-            
-            // Dynamic Grid Puller Simulation from template framework
-            fetch(`https://games.roblox.com/v2/users/${CONFIG.robloxUserId}/games?accessFilter=Public&limit=10`)
-                .then(res => res.json())
-                .then(data => {
-                    if(data && data.data && data.data.length > 0) {
-                        const liveHeader = document.getElementById("live-games-title");
-                        liveHeader.classList.remove("hidden");
-                        // Render logic would map icons here dynamically
-                    }
-                }).catch(e => console.log("Static Mode Active"));
-        });
-
-        function toggleModal() {
-            document.getElementById('projectModal').classList.toggle('hidden');
-            document.getElementById('projectModal').classList.toggle('flex');
-        }
-    </script>
-
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-gradient-to-b from-[rgba(0,188,212,0.12)] to-transparent rounded-full blur-3xl pointer-events-none"></div>
-
-    <nav class="fixed top-0 w-full bg-[#0b0c10]/80 backdrop-blur-xl border-b border-[#222636] z-50">
-        <div class="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
-            <div class="text-sm font-bold tracking-tight">🛠️ blasianaww & porcusa<span class="text-[#00bcd4]">.dev</span></div>
-            <button onclick="toggleModal()" class="bg-gradient-to-r from-[#00bcd4] to-[#8a2be2] text-xs font-bold px-4 py-2 rounded-md shadow-md hover:opacity-90 transition">PROJECT FORM</button>
+    <nav>
+        <div class="logo">BLASIANAWW.BUILD</div>
+        <div class="nav-links">
+            <a href="#projects">Portfolio</a>
+            <span onclick="openModal()" class="project-form-btn">HIRE THROUGH DISCORD</span>
         </div>
     </nav>
 
-    <header class="pt-32 pb-16 text-center max-w-4xl mx-auto px-6 relative z-10">
-        <span class="inline-block bg-[#00bcd4]/10 border border-[#00bcd4]/20 text-[#00bcd4] text-xs font-semibold px-3 py-1 rounded-full mb-6">🚀 Ready for projects in 2026</span>
-        <div class="flex justify-center mb-6">
-            <img id="avatar-img" class="w-24 h-24 rounded-full border-2 border-[#00bcd4] shadow-lg bg-[#12141c]" src="" alt="Avatar">
-        </div>
-        <h1 id="dev-name" class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-3"></h1>
-        <p id="dev-title" class="text-lg text-gray-400 font-medium mb-4"></p>
-        <p id="dev-bio" class="text-sm text-gray-400 max-w-2xl mx-auto leading-relaxed mb-8"></p>
-        
-        <div class="flex justify-center gap-4">
-            <a href="#work" class="bg-gradient-to-r from-[#00bcd4] to-[#8a2be2] text-sm font-bold px-6 py-3 rounded-lg shadow-lg hover:scale-[1.02] transition">View Our Work</a>
-            <button onclick="toggleModal()" class="bg-transparent border border-[#222636] hover:bg-[#12141c] text-sm font-bold px-6 py-3 rounded-lg transition">Start a Project</button>
+    <header>
+        <span class="h-badge">ENVIRONMENTAL ART & ARCHITECTURE // 2026</span>
+        <h1>WORLD <span>BUILDING</span><br>& LEVEL DESIGN</h1>
+        <p class="hero-p">Specializing in immersive, high-fidelity Roblox environments, custom prop architecture, and optimized map layouts.</p>
+        <div class="btn-group">
+            <button onclick="document.getElementById('projects').scrollIntoView();" class="btn btn-blue">Explore Assets</button>
+            <button onclick="openModal()" class="btn btn-outline">Submit Commission</button>
         </div>
     </header>
 
-    <section class="max-w-5xl mx-auto px-6 py-12 border-t border-[#222636]">
-        <h2 class="text-xl font-bold mb-6 flex items-center gap-2">🛠️ Competencies & Tech Stack</h2>
-        <div id="tech-stack-container" class="flex flex-wrap gap-2.5"></div>
-    </section>
+    <div class="stats">
+        <div class="stat"><h3>4+</h3><p>Years Building</p></div>
+        <div class="stat"><h3>50+</h3><p>Maps Delivered</p></div>
+        <div class="stat"><h3>Optimized</h3><p>Low Part Counts</p></div>
+    </div>
 
-    <section id="work" class="max-w-5xl mx-auto px-6 py-12 border-t border-[#222636]">
-        <h2 class="text-xl font-bold mb-2">📂 Featured Showcases</h2>
-        <p class="text-xs text-gray-400 mb-8">Our core systems, environmental assemblies, and optimized asset libraries.</p>
-        <div id="projects-container" class="grid sm:grid-items grid-cols-1 sm:grid-cols-2 gap-6"></div>
-        <h2 id="live-games-title" class="text-xl font-bold mt-12 mb-6 hidden">🎮 Public Experiences</h2>
-    </section>
-
-    <section class="max-w-5xl mx-auto px-6 py-12 border-t border-[#222636]">
-        <div class="grid sm:grid-cols-2 gap-6 bg-[#12141c] border border-[#222636] rounded-2xl p-8 items-center">
-            <div>
-                <span class="inline-block bg-[#8a2be2]/10 border border-[#8a2be2]/20 text-[#b066ff] text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider mb-3">Instant Response Available</span>
-                <h2 class="text-2xl font-bold mb-2">Let's Chat Real-Time</h2>
-                <p class="text-sm text-gray-400 leading-relaxed mb-4">Ready to deploy your game mechanics? Reach out directly via our official channels below.</p>
-                <div class="space-y-1.5 text-sm font-medium text-gray-300">
-                    <p id="discord-tag-1"></p>
-                    <p id="discord-tag-2"></p>
-                    <p id="dev-email"></p>
+    <div class="main-grid">
+        <div class="about-card">
+            <h2 style="margin: 0 0 20px 0;">Studio Services</h2>
+            <p style="color: var(--dim); line-height: 1.6;">Providing high-end environmental design for Roblox experiences. From stylized smooth-terrain low-poly lobbies to highly structured spatial layouts, every map is optimized for lighting and cross-platform performant scaling.</p>
+            <div style="display: flex; gap: 10px; margin-top: 30px;">
+                <div style="flex:1; background: #111; padding: 15px; border-radius: 10px; border: 1px solid #222; text-align: center;">
+                    <span style="font-size: 0.6rem; color: var(--dim); display: block; margin-bottom: 5px;">COMMISSIONS</span>
+                    <span style="font-weight: 800; font-size: 0.8rem;">Open via Discord</span>
+                </div>
+                <div style="flex:1; background: #111; padding: 15px; border-radius: 10px; border: 1px solid #222; text-align: center;">
+                    <span style="font-size: 0.6rem; color: var(--dim); display: block; margin-bottom: 5px;">WORK PATTERN</span>
+                    <span style="font-weight: 800; font-size: 0.8rem; color: var(--accent);">Milestone Updates</span>
                 </div>
             </div>
-            <div class="bg-[#181b26] p-6 rounded-xl border border-[#222636]">
-                <h3 class="font-bold mb-1">Launch Project Brief</h3>
-                <p class="text-xs text-gray-400 mb-4">Instantly outline your maps, deadlines, frameworks, and budgets inside our configuration form.</p>
-                <button onclick="toggleModal()" class="w-full bg-gradient-to-r from-[#00bcd4] to-[#8a2be2] text-xs font-bold py-3 rounded-lg shadow-md hover:opacity-90 transition">Start Project Form ↗</button>
+        </div>
+        <div class="comp-grid">
+            <div class="comp-item"><i class="fas fa-cubes"></i><h3>Map Architecture</h3><p style="font-size: 0.8rem; color: var(--dim);">Custom structured hubs, thematic spacing, and complex physics-aligned infrastructure.</p></div>
+            <div class="comp-item"><i class="fas fa-mountain"></i><h3>Terrain Design</h3><p style="font-size: 0.8rem; color: var(--dim);">Immersive natural topography, smooth-voxel generation, and organic asset layout.</p></div>
+            <div class="comp-item"><i class="fas fa-lightbulb"></i><h3>Atmospheric FX</h3><p style="font-size: 0.8rem; color: var(--dim);">Custom lighting matrices, color correction profiles, and custom environmental skybox staging.</p></div>
+            <div class="comp-item"><i class="fas fa-layer-group"></i><h3>Optimization</h3><p style="font-size: 0.8rem; color: var(--dim);">Strict mesh partitioning, instanced chunking, and aggressive memory-footprint reductions.</p></div>
+        </div>
+    </div>
+
+    <div class="container" id="projects">
+        <h2 style="font-size: 1.5rem; letter-spacing: 2px; margin-bottom: 40px; color: #444;">// ARCHITECTURAL EXHIBITIONS</h2>
+        <div class="p-grid">
+            <div class="p-card">
+                <div>
+                    <div class="p-tags"><span class="p-tag">LOW POLY</span><span class="p-tag">LOBBY</span></div>
+                    <h3>Symmetrical Skyway Hub</h3>
+                    <p>A multi-tiered circular community lobby elevated over floating sky islands, built using clean, geometric modular structural segments and structural trim paths.</p>
+                </div>
+                <div class="p-footer">Build Asset #01</div>
+            </div>
+            <div class="p-card">
+                <div>
+                    <div class="p-tags"><span class="p-tag">TERRAIN</span><span class="p-tag">CAVE</span></div>
+                    <h3>Glacial Cavern Deep-Zone</h3>
+                    <p>Subterranean arctic biome lined with emissive crystal geometry, organic icicle formations, and custom reflective tile pathways over deep-water channels.</p>
+                </div>
+                <div class="p-footer">Build Asset #02</div>
+            </div>
+            <div class="p-card">
+                <div>
+                    <div class="p-tags"><span class="p-tag">STYLIZED</span><span class="p-tag">FANTASY</span></div>
+                    <h3>Windmill Meadow Spawn</h3>
+                    <p>Vibrant green modular stepped terrain featuring dynamic asset placement including custom stylized foliage, stone step configurations, and interactive layout zones.</p>
+                </div>
+                <div class="p-footer">Build Asset #03</div>
+            </div>
+            <div class="p-card">
+                <div>
+                    <div class="p-tags"><span class="p-tag">SCI-FI</span><span class="p-tag">INTERIOR</span></div>
+                    <h3>Hangar Bay Command Core</h3>
+                    <p>Industrial sci-fi terminal setup utilizing heavy paneled wall accents, structural reinforced trusses, atmospheric shadow mapping, and gated containment lines.</p>
+                </div>
+                <div class="p-footer">Build Asset #04</div>
+            </div>
+            <div class="p-card">
+                <div>
+                    <div class="p-tags"><span class="p-tag">STYLIZED</span><span class="p-tag">DUNGEON</span></div>
+                    <h3>Ancient Citadel Gates</h3>
+                    <p>High-walled medieval fortress approach incorporating heavy stone brick asset structures, localized iron fence modules, and structural bridge pathways.</p>
+                </div>
+                <div class="p-footer">Build Asset #05</div>
+            </div>
+            <div class="p-card">
+                <div>
+                    <div class="p-tags"><span class="p-tag">SIMULATOR</span><span class="p-tag">WORLD</span></div>
+                    <h3>Voxel Block Valley</h3>
+                    <p>Clean simulator map segmented into distinct tier progression areas, using chunky stepped grass layout schemes and clear border partition fences.</p>
+                </div>
+                <div class="p-footer">Build Asset #06</div>
+            </div>
+            <div class="p-card">
+                <div>
+                    <div class="p-tags"><span class="p-tag">MINI-GAME</span><span class="p-tag">ARENA</span></div>
+                    <h3>Neon Colosseum Map</h3>
+                    <p>A multi-level competitive arena configuration featuring precise grid placement, distinct team launch pads, and elevated vantage observation zones.</p>
+                </div>
+                <div class="p-footer">Build Asset #07</div>
+            </div>
+            <div class="p-card">
+                <div>
+                    <div class="p-tags"><span class="p-tag">HUB</span><span class="p-tag">PLAZA</span></div>
+                    <h3>Central Fountain Courtyard</h3>
+                    <p>Symmetrical town square assembly framing a detailed tier-fountain monument centerpiece, bounded by stylized town shops and custom foliage rows.</p>
+                </div>
+                <div class="p-footer">Build Asset #08</div>
             </div>
         </div>
-        <footer class="text-center text-xs text-gray-500 mt-12">
-            &copy; 2026 blasianaww & porcusa. Built with Roblox Developer Portfolio Template by UN6107617.
-        </footer>
-    </section>
+    </div>
 
-    <div id="projectModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
-        <div class="bg-[#12141c] border border-[#222636] w-full max-w-lg rounded-xl overflow-hidden shadow-2xl">
+    <div class="modal" id="inquiryModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-briefcase" style="color: var(--accent);"></i> MAP COMMISSION FORM</h2>
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>Full Name</label><input type="text" id="mName" placeholder="Name"></div>
+                <div class="form-group"><label>Discord Username</label><input type="text" id="mDiscord" placeholder="username_here"></div>
+            </div>
+            <div class="form-group"><label>Map Dimensions & Style Details</label><textarea id="mDetails" rows="4" placeholder="Describe map style, theme reference, and dimensions..."></textarea></div>
+            <button class="submit-btn" onclick="submitForm()">SUBMIT VIA DISCORD</button>
+        </div>
+    </div>
+
+    <div class="chat-box">
+        <div class="chat-head"><span>DISCORD INQUIRY CHAT</span><i class="fas fa-comments"></i></div>
+        <div class="chat-body" id="chatLog">
+            <div class="m-them">Looking for custom maps or lobbies? Drop your Discord username and project brief below to ping my server instantly!</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Message...">
+            <button onclick="sendChat()" style="background:var(--accent);border:none;color:white;border-radius:5px;cursor:pointer;padding: 10px 15px;"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        const hook = "https://discord.com/api/webhooks/1503019443066765454/RBObvj82k5jBOtD8wLAVX69DUtJ0H__MfP0NflOgcJBpKfHWBt-WxYQ6L26gY5WzLRa7";
+
+        function openModal() { document.getElementById('inquiryModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('inquiryModal').style.display = 'none'; }
+
+        async function submitForm() {
+            const name = document.getElementById('mName').value;
+            const discord = document.getElementById('mDiscord').value;
+            const details = document.getElementById('mDetails').value;
+            
+            if(!name || !discord || !details) { alert("Please complete all fields."); return; }
+
+            await fetch(hook, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    content: "@everyone 🚨 **NEW MAP COMMISSION INQUIRY RECEIVED!**",
+                    embeds: [{
+                        title: "Build Order Specifications",
+                        color: 39423,
+                        fields: [
+                            { name: "Client Name", value: name, inline: true },
+                            { name: "Discord Contact", value: discord, inline: true },
+                            { name: "Map Brief & Style Details", value: details }
+                        ]
+                    }]
+                })
+            });
+            alert("Commission request successfully transmitted over Discord!");
+            closeModal();
+        }
+
+        async function sendChat() {
+            const input = document.getElementById('chatInput');
+            const log = document.getElementById('chatLog');
+            if(!input.value) return;
+
+            const m = document.createElement('div');
+            m.className = "m-me";
+            m.innerText = input.value;
+            log.appendChild(m);
+
+            await fetch(hook, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ content: `@everyone 💬 **Live Build Chat Ping:** ${input.value}` })
+            });
+
+            input.value = "";
+            log.scrollTop = log.scrollHeight;
+        }
+    </script>
+</body>
+</html>
