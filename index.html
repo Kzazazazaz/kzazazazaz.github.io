@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blasianaww & Porcusa Building Service</title>
+    <title>Blasianaww & Porcusa Building Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg: #030303;
-            --card: #09090b;
-            --card-hover: #131316;
+            --bg: #020203;
+            --card: #08080a;
+            --card-hover: #111114;
             --accent: #00a2ff;
             --accent-glow: rgba(0, 162, 255, 0.2);
             --text: #ffffff;
-            --dim: #a1a1aa;
-            --border: #1f1f23;
+            --dim: #94a3b8;
+            --border: #1e1e24;
             --input: #050507;
-            --success: #22c55e;
+            --success: #10b981;
+            --star: #fbbf24;
         }
 
-        * { box-sizing: border-box; transition: all 0.2s ease; }
+        * { box-sizing: border-box; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
 
         body {
             font-family: 'Inter', -apple-system, sans-serif;
@@ -30,356 +31,388 @@
             scroll-behavior: smooth;
         }
 
+        /* Smooth Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
         nav {
             display: flex; justify-content: space-between; align-items: center;
             padding: 20px 8%; position: sticky; top: 0;
-            background: rgba(3, 3, 3, 0.8); backdrop-filter: blur(20px);
+            background: rgba(2, 2, 3, 0.85); backdrop-filter: blur(16px);
             z-index: 1000; border-bottom: 1px solid var(--border);
         }
-        .logo { font-weight: 900; font-size: 1.1rem; letter-spacing: 0.5px; text-transform: uppercase;}
+        .logo { font-weight: 900; font-size: 1.1rem; letter-spacing: 0.5px; text-transform: uppercase; cursor: default; }
         .logo span { color: var(--accent); }
         .nav-links { display: flex; gap: 30px; align-items: center; }
-        .nav-links a { color: var(--dim); text-decoration: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .nav-links a { color: var(--dim); text-decoration: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; position: relative; }
         .nav-links a:hover { color: var(--text); }
-        .project-form-btn { background: var(--accent); color: white !important; padding: 12px 24px; border-radius: 8px; font-weight: 700; border: none; cursor: pointer; }
-        .project-form-btn:hover { transform: translateY(-1px); background: #008be6; }
+        .nav-links a::after { content: ''; position: absolute; width: 0; height: 1.5px; bottom: -4px; left: 0; background-color: var(--accent); transition: width 0.2s ease; }
+        .nav-links a:hover::after { width: 100%; }
+        
+        .project-form-btn { background: var(--accent); color: white !important; padding: 12px 24px; border-radius: 6px; font-weight: 700; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+        .project-form-btn:hover { background: #008be6; transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+        .project-form-btn:active { transform: translateY(0); }
 
         header {
-            padding: 160px 8% 100px;
-            background: radial-gradient(circle at 50% 10%, #0a1120, var(--bg) 60%);
+            padding: 150px 8% 90px;
+            background: radial-gradient(circle at 50% 10%, #0a101d, var(--bg) 65%);
             border-bottom: 1px solid var(--border);
+            text-align: left;
         }
-        .h-badge { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); border: 1px solid rgba(0,162,255,0.2); background: rgba(0,162,255,0.03); padding: 6px 14px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
-        .h-badge span { display: inline-block; width: 6px; height: 6px; background: var(--success); border-radius: 50%; }
-        h1 { font-size: 3.8rem; letter-spacing: -1.5px; margin: 20px 0; line-height: 1.1; font-weight: 900; text-transform: uppercase; }
-        h1 span { color: var(--accent); }
-        .hero-p { color: var(--dim); font-size: 1.1rem; max-width: 700px; margin: 0 0 40px; line-height: 1.6; }
+        .h-badge { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); border: 1px solid rgba(0,162,255,0.2); background: rgba(0,162,255,0.04); padding: 6px 14px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+        .h-badge span { display: inline-block; width: 6px; height: 6px; background: var(--success); border-radius: 50%; box-shadow: 0 0 8px var(--success); }
         
-        .studio-brief-box {
-            background: var(--card); border: 1px solid var(--border); padding: 30px; border-radius: 12px; max-width: 850px; margin-top: 40px; text-align: left;
-        }
-        .brief-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 20px; }
-        .brief-item h4 { margin: 0 0 5px 0; color: var(--accent); font-size: 0.85rem; text-transform: uppercase; }
-        .brief-item p { margin: 0; color: var(--dim); font-size: 0.85rem; line-height: 1.4; }
-
-        .btn-group { display: flex; gap: 15px; }
-        .btn { padding: 14px 28px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem; border: none; display: inline-flex; align-items: center; gap: 8px; }
+        h1 { font-size: 4rem; letter-spacing: -1.5px; margin: 20px 0; line-height: 1.1; font-weight: 900; text-transform: uppercase; }
+        h1 span { color: var(--accent); }
+        .hero-p { color: var(--dim); font-size: 1.1rem; max-width: 750px; margin: 0 0 40px 0; line-height: 1.6; }
+        
+        .btn-group { display: flex; gap: 15px; margin-bottom: 50px; }
+        .btn { padding: 14px 28px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.9rem; border: none; display: inline-flex; align-items: center; gap: 8px; }
         .btn-blue { background: var(--accent); color: white; }
-        .btn-blue:hover { background: #008be6; transform: translateY(-1px); }
+        .btn-blue:hover { background: #008be6; transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+        .btn-blue:active { transform: translateY(0); }
         .btn-outline { border: 1px solid var(--border); color: white; background: transparent; }
-        .btn-outline:hover { background: rgba(255,255,255,0.03); border-color: #3f3f46; }
+        .btn-outline:hover { background: rgba(255,255,255,0.03); border-color: #4b5563; transform: translateY(-2px); }
+        .btn-outline:active { transform: translateY(0); }
 
-        .container { padding: 80px 8%; }
-        .sec-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 40px; display: flex; align-items: center; gap: 15px; text-transform: uppercase; color: #fff; letter-spacing: 0.5px; }
+        /* The Premium Workflow Central Section */
+        .middle-info-section {
+            background: var(--card); border: 1px solid var(--border); padding: 40px; border-radius: 12px; width: 100%; margin-top: 30px;
+        }
+        .middle-title { font-size: 0.9rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text); margin-bottom: 25px; display: flex; align-items: center; gap: 10px; }
+        .middle-title i { color: var(--accent); }
+        .brief-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; }
+        .brief-item { padding: 5px; }
+        .brief-item h4 { margin: 0 0 8px 0; color: var(--accent); font-size: 0.95rem; text-transform: uppercase; font-weight: 700; }
+        .brief-item p { margin: 0; color: var(--dim); font-size: 0.88rem; line-height: 1.5; }
+
+        .container { padding: 90px 8%; }
+        .sec-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 45px; display: flex; align-items: center; gap: 15px; text-transform: uppercase; color: #fff; letter-spacing: 0.5px; }
         .sec-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-        .p-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 25px; }
+        /* Highly Organized Portfolio Grid Layout */
+        .p-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
         .p-card { 
-            background: var(--card); border: 1px solid var(--border); border-radius: 14px; 
+            background: var(--card); border: 1px solid var(--border); border-radius: 12px; 
             position: relative; overflow: hidden; display: flex; flex-direction: column; cursor: pointer;
         }
-        .p-card:hover { border-color: #3f3f46; background: var(--card-hover); }
+        .p-card:hover { border-color: #4b5563; background: var(--card-hover); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.5); }
         
-        .p-frame-img { width: 100%; aspect-ratio: 16 / 10; overflow: hidden; border-bottom: 1px solid var(--border); background: #050507; }
-        .p-frame-img img { width: 100%; height: 100%; object-fit: cover; }
-        .p-card:hover .p-frame-img img { transform: scale(1.02); }
+        .p-frame-img { width: 100%; aspect-ratio: 16 / 10; overflow: hidden; border-bottom: 1px solid var(--border); background: #040406; position: relative; }
+        .p-frame-img img { width: 100%; height: 100%; object-fit: cover; transform: scale(1); }
+        .p-card:hover .p-frame-img img { transform: scale(1.03); }
         
         .p-details { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
         .p-tags { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
-        .p-tag { font-size: 0.6rem; font-weight: 700; background: rgba(255,255,255,0.03); color: var(--dim); padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border); text-transform: uppercase; }
-        .p-card h3 { font-size: 1.15rem; margin: 0 0 10px 0; font-weight: 700; color: #fff; }
-        .p-card p { color: var(--dim); font-size: 0.85rem; line-height: 1.5; margin: 0 0 20px 0; }
+        .p-tag { font-size: 0.65rem; font-weight: 700; background: rgba(255,255,255,0.03); color: #cbd5e1; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border); text-transform: uppercase; }
+        .p-card h3 { font-size: 1.2rem; margin: 0 0 10px 0; font-weight: 700; color: #fff; letter-spacing: -0.3px; }
+        .p-card p { color: var(--dim); font-size: 0.88rem; line-height: 1.5; margin: 0 0 20px 0; }
         
-        .p-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.65rem; font-weight: 700; color: #52525b; text-transform: uppercase; border-top: 1px solid var(--border); padding-top: 15px; margin-top: auto; }
+        .p-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.68rem; font-weight: 700; color: #64748b; text-transform: uppercase; border-top: 1px solid var(--border); padding-top: 15px; margin-top: auto; }
+        .p-card:hover .p-footer { color: var(--dim); }
 
-        /* Reviews Section */
-        .reviews-section { background: #060608; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px 8%; }
-        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; }
-        .review-card { background: var(--card); border: 1px solid var(--border); padding: 25px; border-radius: 12px; }
-        .rev-user { font-weight: 700; font-size: 0.9rem; color: #fff; margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center; }
-        .rev-stars { color: #eab308; font-size: 0.75rem; }
-        .review-card p { color: var(--dim); font-size: 0.85rem; margin: 10px 0 0; line-height: 1.4; }
+        /* Advanced Dynamic Client Verification & Review Tab */
+        .reviews-section { background: #040406; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 90px 8%; }
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 50px; }
+        .review-card { background: var(--card); border: 1px solid var(--border); padding: 25px; border-radius: 10px; position: relative; display: flex; flex-direction: column; justify-content: space-between; animation: cardFadeIn 0.4s ease-out; }
         
-        .add-review-box { max-width: 600px; background: var(--card); border: 1px solid var(--border); padding: 30px; border-radius: 12px; }
-        .add-review-box h3 { margin-top: 0; font-size: 1.1rem; text-transform: uppercase; }
+        @keyframes cardFadeIn {
+            from { transform: translateY(10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
 
-        .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 6000; display: none; justify-content: center; align-items: center; padding: 20px; }
+        .rev-user { font-weight: 700; font-size: 0.92rem; color: #fff; margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center; }
+        .rev-stars { color: var(--star); font-size: 0.8rem; letter-spacing: 1px; }
+        .review-card p { color: var(--dim); font-size: 0.88rem; margin: 10px 0 0; line-height: 1.5; flex-grow: 1; }
+        
+        .add-review-box { max-width: 650px; background: var(--card); border: 1px solid var(--border); padding: 35px; border-radius: 12px; margin-top: 20px; }
+        .add-review-box h3 { margin-top: 0; font-size: 1.2rem; text-transform: uppercase; font-weight: 800; margin-bottom: 25px; }
+
+        /* Interactive Rating Stars System */
+        .rating-select { display: flex; gap: 8px; align-items: center; margin-top: 4px; }
+        .star-btn { font-size: 1.2rem; color: #334155; cursor: pointer; transition: color 0.15s ease; }
+        .star-btn.active, .star-btn:hover, .star-btn:hover ~ .star-btn { color: var(--star); }
+
+        /* Media Lightbox overlay view */
+        .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.96); z-index: 6000; display: none; justify-content: center; align-items: center; padding: 20px; }
         .lightbox.active { display: flex; }
-        .lightbox img { max-width: 95%; max-height: 90vh; border-radius: 8px; border: 1px solid var(--border); }
-        .lightbox-close { position: absolute; top: 20px; right: 30px; color: #fff; font-size: 2rem; cursor: pointer; }
+        .lightbox img { max-width: 95%; max-height: 85vh; border-radius: 6px; border: 1px solid var(--border); box-shadow: 0 25px 60px rgba(0,0,0,0.8); }
+        .lightbox-close { position: absolute; top: 25px; right: 35px; color: #fff; font-size: 2.2rem; cursor: pointer; }
 
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); z-index: 5000; display: none; justify-content: center; align-items: center; padding: 20px; }
+        /* Advanced Booking Sheet Modal Layer */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); z-index: 5000; display: none; justify-content: center; align-items: center; padding: 20px; }
         .modal.active { display: flex; }
-        .modal-content { background: var(--card); width: 680px; max-height: 90vh; overflow-y: auto; padding: 35px; border-radius: 16px; border: 1px solid var(--border); }
-        .modal-content h2 { margin-top: 0; font-weight: 800; font-size: 1.4rem; text-transform: uppercase; }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
-        .close-modal { cursor: pointer; color: var(--dim); font-size: 1.4rem; }
-        .form-row { display: flex; gap: 15px; margin-bottom: 15px; }
+        .modal-content { background: var(--card); width: 700px; max-height: 90vh; overflow-y: auto; padding: 40px; border-radius: 14px; border: 1px solid var(--border); box-shadow: 0 30px 70px rgba(0,0,0,0.8); position: relative; }
+        .modal-content h2 { margin-top: 0; font-weight: 800; font-size: 1.5rem; text-transform: uppercase; letter-spacing: -0.3px; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .close-modal { cursor: pointer; color: var(--dim); font-size: 1.5rem; }
+        .close-modal:hover { color: #fff; }
+        
+        .form-row { display: flex; gap: 20px; margin-bottom: 20px; }
         .form-group { flex: 1; display: flex; flex-direction: column; }
-        .form-group label { font-size: 0.65rem; font-weight: 700; color: var(--dim); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .modal input, .modal textarea, .modal select { width: 100%; background: var(--input); border: 1px solid var(--border); color: white; padding: 12px; border-radius: 6px; outline: none; font-family: inherit; font-size: 0.85rem; }
+        .form-group label { font-size: 0.68rem; font-weight: 700; color: var(--dim); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        .modal input, .modal textarea, .modal select { width: 100%; background: var(--input); border: 1px solid var(--border); color: white; padding: 14px; border-radius: 6px; outline: none; font-family: inherit; font-size: 0.9rem; }
         .modal input:focus, .modal textarea:focus, .modal select:focus { border-color: var(--accent); }
-        .submit-btn { width: 100%; background: var(--accent); color: white; padding: 14px; border-radius: 8px; border: none; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 0.85rem; margin-top: 10px; }
+        .submit-btn { width: 100%; background: var(--accent); color: white; padding: 16px; border-radius: 6px; border: none; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 0.9rem; margin-top: 15px; }
         .submit-btn:hover { background: #008be6; }
 
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .form-row { flex-direction: column; gap: 15px; }
-            .modal-content { width: 100%; padding: 20px; }
+            h1 { font-size: 2.6rem; }
+            .form-row { flex-direction: column; gap: 20px; }
+            .modal-content { width: 100%; padding: 25px; }
             .p-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">Blasianaww & Porcusa <span>Building</span></div>
+        <div class="logo">Blasianaww & Porcusa <span>Studio</span></div>
         <div class="nav-links">
-            <a href="#portfolio" onmouseenter="playHoverSound()">Build Index</a>
-            <a href="#reviews" onmouseenter="playHoverSound()">Reviews</a>
-            <button onclick="openModal()" onmouseenter="playHoverSound()" class="project-form-btn">DISCORD BOOKING</button>
+            <a href="#portfolio" onclick="playClickSound()">Build Showcase</a>
+            <a href="#reviews" onclick="playClickSound()">Client Reviews</a>
+            <button onclick="openModal()" class="project-form-btn">DISCORD BOOKING</button>
         </div>
     </nav>
 
     <header>
-        <div class="h-badge"><span></span> Commissions Open // Slots Available</div>
+        <div class="h-badge"><span></span> Commissions Open // Order Pipeline Active</div>
         <h1>Roblox Map Design &<br><span>Custom Environments</span></h1>
-        <p class="hero-p">High-quality map layouts, optimization pipelines, and environmental design assets built precisely to your team's specifications. We handle everything from complete low-poly simulator worlds to hyper-detailed smooth terrain projects.</p>
+        <p class="hero-p">High-quality map layouts, terrain systems, and specialized asset packs structured to your exact project parameters. We execute everything from large-scale simulator worlds to performance-optimized lobby systems.</p>
         
         <div class="btn-group">
-            <button onclick="document.getElementById('portfolio').scrollIntoView(); playClickSound();" onmouseenter="playHoverSound()" class="btn btn-blue">View Showcase Layouts</button>
-            <button onclick="openModal()" onmouseenter="playHoverSound()" class="btn btn-outline">Open Commission Form</button>
+            <button onclick="document.getElementById('portfolio').scrollIntoView(); playClickSound();" class="btn btn-blue">Explore Map Portfolio</button>
+            <button onclick="openModal()" class="btn btn-outline">Open Project Form</button>
         </div>
 
-        <div class="studio-brief-box">
-            <div class="logo" style="font-size:0.9rem;">Studio Specifications & Workflow</div>
+        <div class="middle-info-section">
+            <div class="middle-title"><i class="fas fa-layer-group"></i> Environment Engineering & Workspace Protocols</div>
             <div class="brief-grid">
                 <div class="brief-item">
-                    <h4>Performance Target</h4>
-                    <p>Clean chunk loading setups and strict part instances to keep frame rates secure across mobile, console, and PC builds.</p>
+                    <h4>Part Budget Control</h4>
+                    <p>Clean instancing setups and managed chunk distributions to maintain target frame rates on high-player mobile and console game servers.</p>
                 </div>
                 <div class="brief-item">
-                    <h4>Organization</h4>
-                    <p>Every single map file is completely organized with precise workspace naming folders, models, and color layers.</p>
+                    <h4>Clean Workspace Grouping</h4>
+                    <p>All environmental files arrive strictly packed with accurate folder structures, naming layers, and anchored model sets.</p>
                 </div>
                 <div class="brief-item">
-                    <h4>Work Terms</h4>
-                    <p>We work directly alongside your game design documentation. Progress screenshots are uploaded directly to your team order channel.</p>
+                    <h4>Milestone Commits</h4>
+                    <p>We work directly off your design documentation files. Full screenshot breakdowns and live game-test sessions are updated straight to your tracking channel.</p>
                 </div>
             </div>
         </div>
     </header>
 
     <div class="container" id="portfolio">
-        <div class="sec-title">Portfolio Build Showcase</div>
+        <div class="sec-title">Portfolio Layouts</div>
         <div class="p-grid">
             
-            <div class="p-card" onmouseenter="playHoverSound()" onclick="openLightbox('images/Screenshot_2026-05-24_161631.png')">
-                <div class="p-frame-img"><img src="images/Screenshot_2026-05-24_161631.png" alt="Map Project"></div>
+            <div class="p-card" onclick="openLightbox('images/Screenshot_2026-05-24_161631.png')">
+                <div class="p-frame-img"><img src="images/Screenshot_2026-05-24_161631.png" alt="Roblox Map Layout"></div>
                 <div class="p-details">
                     <div>
-                        <div class="p-tags"><span class="p-tag">Low-Poly</span><span class="p-tag">Main Lobby</span></div>
+                        <div class="p-tags"><span class="p-tag">Smooth Low-Poly</span><span class="p-tag">Lobby Core</span></div>
                         <h3>Symmetrical Skyway Core</h3>
-                        <p>Floating game lobby structured with an optimized grid setup. Incorporates custom modular stairs, localized teleporter pads, and distinct zone barriers.</p>
+                        <p>Floating server hub designed on a clean layout grid. Incorporates custom perimeter asset boundaries, landing portals, and clean structural framing.</p>
                     </div>
-                    <div class="p-footer"><span>ID: 24_161631</span><span><i class="fas fa-expand-alt"></i> View Image</span></div>
+                    <div class="p-footer"><span>ID: 24_161631</span><span><i class="fas fa-expand-alt"></i> Open View</span></div>
                 </div>
             </div>
 
-            <div class="p-card" onmouseenter="playHoverSound()" onclick="openLightbox('images/Screenshot_2026-05-24_162405.png')">
-                <div class="p-frame-img"><img src="images/Screenshot_2026-05-24_162405.png" alt="Map Project"></div>
+            <div class="p-card" onclick="openLightbox('images/Screenshot_2026-05-24_162405.png')">
+                <div class="p-frame-img"><img src="images/Screenshot_2026-05-24_162405.png" alt="Roblox Map Layout"></div>
                 <div class="p-details">
                     <div>
-                        <div class="p-tags"><span class="p-tag">Voxel Terrain</span><span class="p-tag">Cave</span></div>
+                        <div class="p-tags"><span class="p-tag">Smooth Terrain</span><span class="p-tag">Underground</span></div>
                         <h3>Glacial Cavern Underground</h3>
-                        <p>Organic smooth terrain cavern environment. Utilizes deep ice layers blended seamlessly with custom neon crystal clusters and custom rock mesh edges.</p>
+                        <p>Hand-sculpted organic cave environment combining customized ice voxel layouts with colored translucent crystal meshes.</p>
                     </div>
-                    <div class="p-footer"><span>ID: 24_162405</span><span><i class="fas fa-expand-alt"></i> View Image</span></div>
+                    <div class="p-footer"><span>ID: 24_162405</span><span><i class="fas fa-expand-alt"></i> Open View</span></div>
                 </div>
             </div>
 
-            <div class="p-card" onmouseenter="playHoverSound()" onclick="openLightbox('images/Screenshot_2026-05-24_161656.png')">
-                <div class="p-frame-img"><img src="images/Screenshot_2026-05-24_161656.png" alt="Map Project"></div>
+            <div class="p-card" onclick="openLightbox('images/Screenshot_2026-05-24_161656.png')">
+                <div class="p-frame-img"><img src="images/Screenshot_2026-05-24_161656.png" alt="Roblox Map Layout"></div>
                 <div class="p-details">
                     <div>
                         <div class="p-tags"><span class="p-tag">Stylized</span><span class="p-tag">Spawn Zone</span></div>
                         <h3>Windmill Grassland Spawn</h3>
-                        <p>Open sandbox entry area featuring hand-modeled windmills, custom foliage models, and tiered cliff pathing boundaries built within tight part budgets.</p>
+                        <p>Starter environment utilizing stylized low-poly grass distributions, modular custom windmills, and tiered rock cliffs.</p>
                     </div>
-                    <div class="p-footer"><span>ID: 24_161656</span><span><i class="fas fa-expand-alt"></i> View Image</span></div>
+                    <div class="p-footer"><span>ID: 24_161656</span><span><i class="fas fa-expand-alt"></i> Open View</span></div>
                 </div>
             </div>
 
-            <div class="p-card" onmouseenter="playHoverSound()" onclick="openLightbox('images/Screenshot_2026-05-24_161753.png')">
-                <div class="p-frame-img"><img src="images/Screenshot_2026-05-24_161753.png" alt="Map Project"></div>
+            <div class="p-card" onclick="openLightbox('images/Screenshot_2026-05-24_161753.png')">
+                <div class="p-frame-img"><img src="images/Screenshot_2026-05-24_161753.png" alt="Roblox Map Layout"></div>
                 <div class="p-details">
                     <div>
-                        <div class="p-tags"><span class="p-tag">Sci-Fi</span><span class="p-tag">Interior Room</span></div>
+                        <div class="p-tags"><span class="p-tag">Sci-Fi</span><span class="p-tag">Interior Hub</span></div>
                         <h3>Hangar Outpost Command Deck</h3>
-                        <p>Industrial facility interior built using unique plate profiles, framing girders, and dense atmospheric custom lighting configurations.</p>
+                        <p>Industrial facility interior focusing on smooth steel support trusses, custom plates, and atmospheric lighting color settings.</p>
                     </div>
-                    <div class="p-footer"><span>ID: 24_161753</span><span><i class="fas fa-expand-alt"></i> View Image</span></div>
+                    <div class="p-footer"><span>ID: 24_161753</span><span><i class="fas fa-expand-alt"></i> Open View</span></div>
                 </div>
             </div>
 
-            <div class="p-card" onmouseenter="playHoverSound()" onclick="openLightbox('images/Screenshot_2026-05-24_161712.png')">
-                <div class="p-frame-img"><img src="images/Screenshot_2026-05-24_161712.png" alt="Map Project"></div>
+            <div class="p-card" onclick="openLightbox('images/Screenshot_2026-05-24_161712.png')">
+                <div class="p-frame-img"><img src="images/Screenshot_2026-05-24_161712.png" alt="Roblox Map Layout"></div>
                 <div class="p-details">
                     <div>
                         <div class="p-tags"><span class="p-tag">Medieval</span><span class="p-tag">Fortress</span></div>
                         <h3>Citadel Gate Passage</h3>
-                        <p>Brick-built castle entrance layout balancing high-fidelity texture sheets with clean component geometry and balanced bridge paths.</p>
+                        <p>Fortified fortress gate designed for PvP navigation lanes. Built with interlocking stone block textures and bridge walkways.</p>
                     </div>
-                    <div class="p-footer"><span>ID: 24_161712</span><span><i class="fas fa-expand-alt"></i> View Image</span></div>
+                    <div class="p-footer"><span>ID: 24_161712</span><span><i class="fas fa-expand-alt"></i> Open View</span></div>
                 </div>
             </div>
 
-            <div class="p-card" onmouseenter="playHoverSound()" onclick="openLightbox('images/Screenshot_2026-05-24_162319.png')">
-                <div class="p-frame-img"><img src="images/Screenshot_2026-05-24_162319.png" alt="Map Project"></div>
+            <div class="p-card" onclick="openLightbox('images/Screenshot_2026-05-24_162319.png')">
+                <div class="p-frame-img"><img src="images/Screenshot_2026-05-24_162319.png" alt="Roblox Map Layout"></div>
                 <div class="p-details">
                     <div>
-                        <div class="p-tags"><span class="p-tag">Simulator</span><span class="p-tag">Map Base</span></div>
+                        <div class="p-tags"><span class="p-tag">Simulator</span><span class="p-tag">Progression</span></div>
                         <h3>Block Grid Valley Layout</h3>
-                        <p>Classic blocky multi-zone map setup built perfectly for simulators. Features clear separation borders and item drop positions.</p>
+                        <p>Multi-tier progressive simulator template map built for clean level changes and exact boundaries.</p>
                     </div>
-                    <div class="p-footer"><span>ID: 24_162319</span><span><i class="fas fa-expand-alt"></i> View Image</span></div>
+                    <div class="p-footer"><span>ID: 24_162319</span><span><i class="fas fa-expand-alt"></i> Open View</span></div>
                 </div>
             </div>
 
-            <div class="p-card" onmouseenter="playHoverSound()" onclick="openLightbox('images/Screenshot_2026-05-24_161913.png')">
-                <div class="p-frame-img"><img src="images/Screenshot_2026-05-24_161913.png" alt="Map Project"></div>
+            <div class="p-card" onclick="openLightbox('images/Screenshot_2026-05-24_161913.png')">
+                <div class="p-frame-img"><img src="images/Screenshot_2026-05-24_161913.png" alt="Roblox Map Layout"></div>
                 <div class="p-details">
                     <div>
-                        <div class="p-tags"><span class="p-tag">PVP</span><span class="p-tag">Combat Arena</span></div>
+                        <div class="p-tags"><span class="p-tag">PVP</span><span class="p-tag">Arena Base</span></div>
                         <h3>Symmetrical Battle Colosseum</h3>
-                        <p>Competitive map setup prioritizing sightlines and pathways. Includes uniform ramp structures and balanced cover options.</p>
+                        <p>Balanced combat layout mapping optimized for even competitive play routes, spawn platforms, and cover props.</p>
                     </div>
-                    <div class="p-footer"><span>ID: 24_161913</span><span><i class="fas fa-expand-alt"></i> View Image</span></div>
+                    <div class="p-footer"><span>ID: 24_161913</span><span><i class="fas fa-expand-alt"></i> Open View</span></div>
                 </div>
             </div>
 
-            <div class="p-card" onmouseenter="playHoverSound()" onclick="openLightbox('images/Screenshot_2026-05-24_161707.png')">
-                <div class="p-frame-img"><img src="images/Screenshot_2026-05-24_161707.png" alt="Map Project"></div>
+            <div class="p-card" onclick="openLightbox('images/Screenshot_2026-05-24_161707.png')">
+                <div class="p-frame-img"><img src="images/Screenshot_2026-05-24_161707.png" alt="Roblox Map Layout"></div>
                 <div class="p-details">
                     <div>
-                        <div class="p-tags"><span class="p-tag">Futuristic</span><span class="p-tag">Control Room</span></div>
+                        <div class="p-tags"><span class="p-tag">Modern Tech</span><span class="p-tag">Lobby</span></div>
                         <h3>Cybernetic Operations Bay</h3>
-                        <p>Sleek command room using customized console surfaces, neon indicator accents, and clean workspace organization layouts.</p>
+                        <p>High-tech room built using modular command panels, clean neon strip parts, and glass partitions.</p>
                     </div>
-                    <div class="p-footer"><span>ID: 24_161707</span><span><i class="fas fa-expand-alt"></i> View Image</span></div>
+                    <div class="p-footer"><span>ID: 24_161707</span><span><i class="fas fa-expand-alt"></i> Open View</span></div>
                 </div>
             </div>
 
-            <div class="p-card" onmouseenter="playHoverSound()" onclick="openLightbox('images/Screenshot_2026-05-24_161703.png')">
-                <div class="p-frame-img"><img src="images/Screenshot_2026-05-24_161703.png" alt="Map Project"></div>
+            <div class="p-card" onclick="openLightbox('images/Screenshot_2026-05-24_161703.png')">
+                <div class="p-frame-img"><img src="images/Screenshot_2026-05-24_161703.png" alt="Roblox Map Layout"></div>
                 <div class="p-details">
                     <div>
-                        <div class="p-tags"><span class="p-tag">Town Square</span><span class="p-tag">Plaza</span></div>
+                        <div class="p-tags"><span class="p-tag">Trading Hub</span><span class="p-tag">Plaza</span></div>
                         <h3>Central Fountain Hub</h3>
-                        <p>Town plaza map laid out around a detailed central fountain model, surrounded by stylized shops and clean walkway parts.</p>
+                        <p>Game trading square structured around a central tiered water fountain, lined with low-poly house frames.</p>
                     </div>
-                    <div class="p-footer"><span>ID: 24_161703</span><span><i class="fas fa-expand-alt"></i> View Image</span></div>
+                    <div class="p-footer"><span>ID: 24_161703</span><span><i class="fas fa-expand-alt"></i> Open View</span></div>
                 </div>
             </div>
 
-            <div class="p-card" onmouseenter="playHoverSound()" onclick="openLightbox('images/Screenshot_2026-05-25_225643.png')">
-                <div class="p-frame-img"><img src="images/Screenshot_2026-05-25_225643.png" alt="Map Project"></div>
+            <div class="p-card" onclick="openLightbox('images/Screenshot_2026-05-25_225643.png')">
+                <div class="p-frame-img"><img src="images/Screenshot_2026-05-25_225643.png" alt="Roblox Map Layout"></div>
                 <div class="p-details">
                     <div>
                         <div class="p-tags"><span class="p-tag">Tactical</span><span class="p-tag">FPS Map</span></div>
                         <h3>Military Compound Layout</h3>
-                        <p>Detailed shooter map utilizing dark stone walls, defensive watchtowers, and multi-level warehouse interior spaces.</p>
+                        <p>Shooter map configuration featuring dark industrial warehouse setups, concrete roadblocks, and open defense yards.</p>
                     </div>
-                    <div class="p-footer"><span>ID: 25_225643</span><span><i class="fas fa-expand-alt"></i> View Image</span></div>
+                    <div class="p-footer"><span>ID: 25_225643</span><span><i class="fas fa-expand-alt"></i> Open View</span></div>
                 </div>
             </div>
 
-            <div class="p-card" onmouseenter="playHoverSound()" onclick="openLightbox('images/Screenshot_2026-05-25_225750.png')">
-                <div class="p-frame-img"><img src="images/Screenshot_2026-05-25_225750.png" alt="Map Project"></div>
+            <div class="p-card" onclick="openLightbox('images/Screenshot_2026-05-25_225750.png')">
+                <div class="p-frame-img"><img src="images/Screenshot_2026-05-25_225750.png" alt="Roblox Map Layout"></div>
                 <div class="p-details">
                     <div>
                         <div class="p-tags"><span class="p-tag">Fantasy</span><span class="p-tag">Village</span></div>
                         <h3>Sunset Trading Outpost</h3>
-                        <p>Cozy village center showcasing warm custom lighting setups, custom-shaped roofs, and clean open dirt paths.</p>
+                        <p>Cozy open-air marketplace utilizing custom angled roof frames, storefront displays, and warm ambient sun lighting.</p>
                     </div>
-                    <div class="p-footer"><span>ID: 25_225750</span><span><i class="fas fa-expand-alt"></i> View Image</span></div>
+                    <div class="p-footer"><span>ID: 25_225750</span><span><i class="fas fa-expand-alt"></i> Open View</span></div>
                 </div>
             </div>
 
-            <div class="p-card" onmouseenter="playHoverSound()" onclick="openLightbox('images/Screenshot_2026-05-25_225806.png')">
-                <div class="p-frame-img"><img src="images/Screenshot_2026-05-25_225806.png" alt="Map Project"></div>
+            <div class="p-card" onclick="openLightbox('images/Screenshot_2026-05-25_225806.png')">
+                <div class="p-frame-img"><img src="images/Screenshot_2026-05-25_225806.png" alt="Roblox Map Layout"></div>
                 <div class="p-details">
                     <div>
-                        <div class="p-tags"><span class="p-tag">Neon</span><span class="p-tag">Race Track</span></div>
+                        <div class="p-tags"><span class="p-tag">Neon</span><span class="p-tag">Racetrack</span></div>
                         <h3>Vaporwave Speed Circuit</h3>
-                        <p>Stylized stadium racetrack layout detailed with bright neon guidelines and clean banking turns optimized for vehicle physics.</p>
+                        <p>Racing track project with integrated speed turn banking models and bright neon guiding tracks.</p>
                     </div>
-                    <div class="p-footer"><span>ID: 25_225806</span><span><i class="fas fa-expand-alt"></i> View Image</span></div>
+                    <div class="p-footer"><span>ID: 25_225806</span><span><i class="fas fa-expand-alt"></i> Open View</span></div>
                 </div>
             </div>
 
-            <div class="p-card" onmouseenter="playHoverSound()" onclick="openLightbox('images/Screenshot_2026-05-25_225838.png')">
-                <div class="p-frame-img"><img src="images/Screenshot_2026-05-25_225838.png" alt="Map Project"></div>
+            <div class="p-card" onclick="openLightbox('images/Screenshot_2026-05-25_225838.png')">
+                <div class="p-frame-img"><img src="images/Screenshot_2026-05-25_225838.png" alt="Roblox Map Layout"></div>
                 <div class="p-details">
                     <div>
-                        <div class="p-tags"><span class="p-tag">Dungeon</span><span class="p-tag">Crypt</span></div>
+                        <div class="p-tags"><span class="p-tag">Dungeon</span><span class="p-tag">Dark Fantasy</span></div>
                         <h3>Obsidian Ruin Dungeon</h3>
-                        <p>Dark fantasy crypt level utilizing sharp obsidian pillars, stone floor variations, and tight linear progression paths.</p>
+                        <p>Linear dungeon interior layout mapped with sharp volcanic stone spikes and structured crypt stairways.</p>
                     </div>
-                    <div class="p-footer"><span>ID: 25_225838</span><span><i class="fas fa-expand-alt"></i> View Image</span></div>
+                    <div class="p-footer"><span>ID: 25_225838</span><span><i class="fas fa-expand-alt"></i> Open View</span></div>
                 </div>
             </div>
 
-            <div class="p-card" onmouseenter="playHoverSound()" onclick="openLightbox('images/Screenshot_2026-05-25_225900.png')">
-                <div class="p-frame-img"><img src="images/Screenshot_2026-05-25_225900.png" alt="Map Project"></div>
+            <div class="p-card" onclick="openLightbox('images/Screenshot_2026-05-25_225900.png')">
+                <div class="p-frame-img"><img src="images/Screenshot_2026-05-25_225900.png" alt="Roblox Map Layout"></div>
                 <div class="p-details">
                     <div>
-                        <div class="p-tags"><span class="p-tag">Modern</span><span class="p-tag">Office</span></div>
+                        <div class="p-tags"><span class="p-tag">Modern</span><span class="p-tag">Glass Base</span></div>
                         <h3>Skylight Corporate Terminal</h3>
-                        <p>Sleek modern lobby architecture focusing on wide glass ceiling panes and custom light arrays.</p>
+                        <p>Modern layout showcasing overhead skylight mesh frames, clean structural pillars, and polished showroom floors.</p>
                     </div>
-                    <div class="p-footer"><span>ID: 25_225900</span><span><i class="fas fa-expand-alt"></i> View Image</span></div>
+                    <div class="p-footer"><span>ID: 25_225900</span><span><i class="fas fa-expand-alt"></i> Open View</span></div>
                 </div>
             </div>
 
-            <div class="p-card" onmouseenter="playHoverSound()" onclick="openLightbox('images/Screenshot_2026-05-25_225931.png')">
-                <div class="p-frame-img"><img src="images/Screenshot_2026-05-25_225931.png" alt="Map Project"></div>
+            <div class="p-card" onclick="openLightbox('images/Screenshot_2026-05-25_225931.png')">
+                <div class="p-frame-img"><img src="images/Screenshot_2026-05-25_225931.png" alt="Roblox Map Layout"></div>
                 <div class="p-details">
                     <div>
-                        <div class="p-tags"><span class="p-tag">Overgrown</span><span class="p-tag">Temple</span></div>
+                        <div class="p-tags"><span class="p-tag">Ancient</span><span class="p-tag">Overgrown</span></div>
                         <h3>Mossy Relic Crypt Room</h3>
-                        <p>Ancient stone sanctuary maps populated with dense vine groups and low-poly tree assets built for clean rendering performance.</p>
+                        <p>Forgotten shrine layout filled with low-poly hanging vines, decayed wall stone parts, and nature assets.</p>
                     </div>
-                    <div class="p-footer"><span>ID: 25_225931</span><span><i class="fas fa-expand-alt"></i> View Image</span></div>
+                    <div class="p-footer"><span>ID: 25_225931</span><span><i class="fas fa-expand-alt"></i> Open View</span></div>
                 </div>
             </div>
 
-            <div class="p-card" onmouseenter="playHoverSound()" onclick="openLightbox('images/Screenshot_2026-05-25_225954.png')">
-                <div class="p-frame-img"><img src="images/Screenshot_2026-05-25_225954.png" alt="Map Project"></div>
+            <div class="p-card" onclick="openLightbox('images/Screenshot_2026-05-25_225954.png')">
+                <div class="p-frame-img"><img src="images/Screenshot_2026-05-25_225954.png" alt="Roblox Map Layout"></div>
                 <div class="p-details">
                     <div>
-                        <div class="p-tags"><span class="p-tag">Desert</span><span class="p-tag">Simulator</span></div>
+                        <div class="p-tags"><span class="p-tag">Desert</span><span class="p-tag">Oasis</span></div>
                         <h3>Canyon Oasis Gateway</h3>
-                        <p>Vibrant desert environment with tall custom-sculpted stone cliffs, sandy pathways, and designated layout locations for gameplay items.</p>
+                        <p>Desert gameplay map bounded by custom hand-sculpted rock canyon borders and centered gathering plains.</p>
                     </div>
-                    <div class="p-footer"><span>ID: 25_225954</span><span><i class="fas fa-expand-alt"></i> View Image</span></div>
+                    <div class="p-footer"><span>ID: 25_225954</span><span><i class="fas fa-expand-alt"></i> Open View</span></div>
                 </div>
             </div>
 
-            <div class="p-card" onmouseenter="playHoverSound()" onclick="openLightbox('images/Screenshot_2026-05-25_230148.png')">
-                <div class="p-frame-img"><img src="images/Screenshot_2026-05-25_230148.png" alt="Map Project"></div>
+            <div class="p-card" onclick="openLightbox('images/Screenshot_2026-05-25_230148.png')">
+                <div class="p-frame-img"><img src="images/Screenshot_2026-05-25_230148.png" alt="Roblox Map Layout"></div>
                 <div class="p-details">
                     <div>
-                        <div class="p-tags"><span class="p-tag">Sci-Fi</span><span class="p-tag">Arena</span></div>
-                        <h3>Cybernetic Neon Grid Arena</h3>
-                        <p>Laser tag styled combat map displaying clean layout corridors, elevated jump sections, and glowing structural accent parts.</p>
+                        <div class="p-tags"><span class="p-tag">Sci-Fi</span><span class="p-tag">Combat Grid</span></div>
+                        <h3>Laser Tactical Grid Arena</h3>
+                        <p>Sci-fi arcade map layout featuring symmetrical choke points, glowing ramp assets, and platform cover models.</p>
                     </div>
-                    <div class="p-footer"><span>ID: 25_230148</span><span><i class="fas fa-expand-alt"></i> View Image</span></div>
+                    <div class="p-footer"><span>ID: 25_230148</span><span><i class="fas fa-expand-alt"></i> Open View</span></div>
                 </div>
             </div>
 
@@ -391,56 +424,59 @@
         <div class="reviews-grid" id="reviewsContainer">
             
             <div class="review-card">
-                <div class="rev-user">VoltGames_Dev <span class="rev-stars">★★★★★</span></div>
-                <p>Ordered a full simulator map with 5 separate zones. Work was completely finished within 8 days. Everything was cleanly grouped inside models and optimized perfectly for mobile users.</p>
+                <div class="rev-user">BuiltByXavi <span class="rev-stars">★★★★★</span></div>
+                <p>Hired them for a complete 4-zone simulator map project. Work was handed over exactly on the 7th day. Part counts were super low and optimization files run fine on mobile servers.</p>
             </div>
             <div class="review-card">
-                <div class="rev-user">Dev_Kaleb <span class="rev-stars">★★★★★</span></div>
-                <p>Insanely clean asset organization. No random parts lying around, and the lighting maps they put together for our dungeon completely changed the game vibe. Will hire again.</p>
+                <div class="rev-user">K0SMIC_dev <span class="rev-stars">★★★★★</span></div>
+                <p>Cleanest folder arrangement I've gotten from an asset team. Workspace was perfectly named and grouped. The lighting presets they created for our dungeon look crazy.</p>
             </div>
             <div class="review-card">
-                <div class="rev-user">BlockyStudioOwner <span class="rev-stars">★★★★★</span></div>
-                <p>Excellent communication. They provided progress screenshots inside our Discord channel every single evening. Map snap alignments were exactly to the stud.</p>
+                <div class="rev-user">rxse_gold <span class="rev-stars">★★★★</span></div>
+                <p>Good communication through the dev track channel. Sent screenshots every single night of the map build blockout stages. Snap alignments were dead accurate to the studs.</p>
             </div>
             <div class="review-card">
-                <div class="rev-user">Snoopy_Builds <span class="rev-stars">★★★★★</span></div>
-                <p>Brought our sci-fi command center script design sheet to life. Best part budget preservation I've seen from a team on devforum.</p>
+                <div class="rev-user">Vesteria_Fan <span class="rev-stars">★★★★★</span></div>
+                <p>Turned our 2D layout script layouts into a solid sci-fi interior project. Excellent consideration for map boundaries and hitboxes.</p>
             </div>
             <div class="review-card">
-                <div class="rev-user">Rbx_VibeCheck <span class="rev-stars">★★★★★</span></div>
-                <p>Ordered a custom smooth terrain cavern layout. Super smooth voxel configurations, zero jagged edges, and custom crystal assets are top-tier quality.</p>
+                <div class="rev-user">ty_builder99 <span class="rev-stars">★★★★</span></div>
+                <p>Commissioned a custom smooth terrain voxel cavern system. Smooth transitions everywhere, zero mesh clipping errors, and custom glow crystals came out flawless.</p>
             </div>
             <div class="review-card">
-                <div class="rev-user">Lumina_Studios <span class="rev-stars">★★★★★</span></div>
-                <p>Fast delivery on an overgrown temple combat map layout. Level pathing parameters are flawless. Highly recommend Blasianaww & Porcusa.</p>
+                <div class="rev-user">Lumina_Rbx <span class="rev-stars">★★★★★</span></div>
+                <p>Extremely fast completion time on an overgrown jungle combat map. Nav lanes and pathways are completely optimized for character movement scaling.</p>
             </div>
             <div class="review-card">
-                <div class="rev-user">Tix_Legacy <span class="rev-stars">★★★★★</span></div>
-                <p>Very fast turnaround. Handled our customized town square plaza map effortlessly, keeping the mesh count perfectly manageable.</p>
+                <div class="rev-user">cody_devv <span class="rev-stars">★★★★★</span></div>
+                <p>Fast turnaround time. Handled our stylized trading plaza project without filling the game with high-poly unoptimized lag meshes.</p>
             </div>
 
         </div>
 
         <div class="add-review-box">
-            <h3>Submit Verification Review</h3>
+            <h3>Leave a Commission Review</h3>
             <div class="form-row">
-                <div class="form-group" style="flex:2;"><label>Roblox/Discord Username</label><input type="text" id="revUser" placeholder="e.g., BuildMaster_99"></div>
+                <div class="form-group" style="flex:2;"><label>Roblox or Discord Username</label><input type="text" id="revUser" placeholder="e.g., BlockyDev_X"></div>
                 <div class="form-group" style="flex:1;">
-                    <label>Rating</label>
-                    <select id="revStars">
-                        <option value="★★★★★">5 Stars</option>
-                        <option value="★★★★">4 Stars</option>
-                    </select>
+                    <label>Rating Score</label>
+                    <div class="rating-select" id="starSelector">
+                        <i class="fas fa-star star-btn active" data-value="1" onclick="setRating(1)"></i>
+                        <i class="fas fa-star star-btn active" data-value="2" onclick="setRating(2)"></i>
+                        <i class="fas fa-star star-btn active" data-value="3" onclick="setRating(3)"></i>
+                        <i class="fas fa-star star-btn active" data-value="4" onclick="setRating(4)"></i>
+                        <i class="fas fa-star star-btn active" data-value="5" onclick="setRating(5)"></i>
+                    </div>
                 </div>
             </div>
-            <div class="form-group" style="margin-bottom:15px;"><label>Your Commission Experience Description</label><textarea id="revText" rows="3" placeholder="Describe the service, optimization, or map layout speed..."></textarea></div>
-            <button class="submit-btn" style="width:auto; padding:12px 24px;" onclick="postReview()">Submit Review to Wall</button>
+            <div class="form-group" style="margin-bottom:15px;"><label>Commission Experience Feedback</label><textarea id="revText" rows="3" placeholder="Describe the environment quality, workspace layout speed, or optimization..."></textarea></div>
+            <button class="submit-btn" style="width:auto; padding:12px 24px;" onclick="postReview()">Post Review to Board</button>
         </div>
     </div>
 
     <div class="lightbox" id="imageLightbox" onclick="closeLightbox()">
         <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-        <img src="" id="lightboxImg" alt="Enlarged Portfolio Element">
+        <img src="" id="lightboxImg" alt="Enlarged Portfolio View">
     </div>
 
     <div class="modal" id="inquiryModal">
@@ -450,68 +486,57 @@
                 <span class="close-modal" onclick="closeModal()">&times;</span>
             </div>
             <div class="form-row">
-                <div class="form-group"><label>Client / Team Studio Name</label><input type="text" id="mName" placeholder="e.g., Nexus Gaming Group"></div>
-                <div class="form-group"><label>Discord Contact Handle</label><input type="text" id="mDiscord" placeholder="e.g., blasianaww"></div>
+                <div class="form-group"><label>Client Studio Name / Project Name</label><input type="text" id="mName" placeholder="e.g., Horizon Games Group"></div>
+                <div class="form-group"><label>Discord Contact Handle</label><input type="text" id="mDiscord" placeholder="e.g., user_handle"></div>
             </div>
             <div class="form-row">
-                <div class="form-group"><label>Budget Range (Robux / USD)</label><input type="text" id="mBudget" placeholder="e.g., 60,000 Robux"></div>
+                <div class="form-group"><label>Budget Range Allocation (Robux / USD)</label><input type="text" id="mBudget" placeholder="e.g., 75,000 Robux"></div>
                 <div class="form-group">
-                    <label>Map Style Category</label>
+                    <label>Map Environment Style</label>
                     <select id="mStyle">
-                        <option value="Low Poly / Stylized Design">Low Poly / Stylized Design</option>
-                        <option value="Smooth Terrain / Organic Landscapes">Smooth Terrain / Organic Landscapes</option>
-                        <option value="Detailed Smooth-Gird Sci-Fi Facility">Detailed Smooth-Grid Sci-Fi Facility</option>
-                        <option value="Simulator Multi-Zone Progressive Layout">Simulator Multi-Zone Progressive Layout</option>
+                        <option value="Smooth Low-Poly / Stylized Design">Smooth Low-Poly / Stylized Design</option>
+                        <option value="Smooth Terrain / Voxel Landscapes">Smooth Terrain / Voxel Landscapes</option>
+                        <option value="Detailed Industrial Sci-Fi Facility">Detailed Industrial Sci-Fi Facility</option>
+                        <option value="Simulator Multi-Zone Progressive World">Simulator Multi-Zone Progressive World</option>
                     </select>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group">
-                    <label>Estimated Project Scale</label>
+                    <label>Estimated Map Size</label>
                     <select id="mScale">
-                        <option value="Small Asset Pack / Spawn Lobby Only">Small Asset Pack / Spawn Lobby Only</option>
-                        <option value="Medium Scale Game Map (Approx 1000x1000 studs)">Medium Scale Game Map (Approx 1000x1000 studs)</option>
-                        <option value="Large Scale / Multi-Zone Map Environment">Large Scale / Multi-Zone Map Environment</option>
+                        <option value="Small Asset Set / Standalone Lobby Model">Small Asset Set / Standalone Lobby Model</option>
+                        <option value="Medium Map Environment (approx. 1000x1000 studs)">Medium Map Environment (approx. 1000x1000 studs)</option>
+                        <option value="Large World Map / Complex Multi-Zone Project">Large World Map / Complex Multi-Zone Project</option>
                     </select>
                 </div>
-                <div class="form-group"><label>Reference Image Links (Optional)</label><input type="text" id="mRefs" placeholder="Imgur, Discord or Roblox Link"></div>
+                <div class="form-group"><label>Reference Image Document Links (Optional)</label><input type="text" id="mRefs" placeholder="Imgur, Discord or Roblox asset URLs"></div>
             </div>
-            <div class="form-group" style="margin-bottom: 20px;"><label>Project Briefing, Target Part Limits & Constraints</label><textarea id="mDetails" rows="4" placeholder="Detail the layout requirements, theme directions, and game mechanics our build needs to accommodate..."></textarea></div>
-            <button class="submit-btn" onclick="submitForm()">Submit Booking Proposal</button>
+            <div class="form-group" style="margin-bottom: 20px;"><label>Project Specifications, Model Requirements & Performance Limits</label><textarea id="mDetails" rows="4" placeholder="Detail your map layout blueprints, theme parameters, collision boundaries, and deadline expectations..."></textarea></div>
+            <button class="submit-btn" onclick="submitForm()">Submit Booking Sheet</button>
         </div>
     </div>
 
     <script>
         const hook = "https://discord.com/api/webhooks/1503019443066765454/RBObvj82k5jBOtD8wLAVX69DUtJ0H__MfP0NflOgcJBpKfHWBt-WxYQ6L26gY5WzLRa7";
+        let chosenRating = 5;
 
-        // Clean Web Audio Context
+        // Clean Web Synthetic Audio Generator
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        function playHoverSound() {
-            try {
-                let osc = audioCtx.createOscillator();
-                let gain = audioCtx.createGain();
-                osc.type = 'sine'; osc.frequency.setValueAtTime(350, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.008, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.04);
-                osc.connect(gain); gain.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime + 0.04);
-            } catch(e){}
-        }
         function playClickSound() {
             try {
                 let osc = audioCtx.createOscillator();
                 let gain = audioCtx.createGain();
-                osc.type = 'triangle'; osc.frequency.setValueAtTime(160, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+                osc.type = 'triangle'; osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.08);
                 osc.connect(gain); gain.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime + 0.08);
             } catch(e){}
         }
 
-        // Modal Operations
         function openModal() { playClickSound(); document.getElementById('inquiryModal').classList.add('active'); }
         function closeModal() { playClickSound(); document.getElementById('inquiryModal').classList.remove('active'); }
 
-        // Lightbox Operations
         function openLightbox(imgSrc) {
             playClickSound();
             const lb = document.getElementById('imageLightbox');
@@ -520,14 +545,31 @@
         }
         function closeLightbox() { document.getElementById('imageLightbox').classList.remove('active'); }
 
-        // Review Storage Core
+        // Dynamic 1-5 Star Selection Logic
+        function setRating(val) {
+            playClickSound();
+            chosenRating = val;
+            const stars = document.querySelectorAll('#starSelector .star-btn');
+            stars.forEach((star, index) => {
+                if(index < val) {
+                    star.classList.add('active');
+                    star.style.color = 'var(--star)';
+                } else {
+                    star.classList.remove('active');
+                    star.style.color = '#334155';
+                }
+            });
+        }
+
+        // LocalStorage Review Persistence Layer
         window.addEventListener('DOMContentLoaded', () => {
-            const stored = JSON.parse(localStorage.getItem('studio_reviews') || '[]');
+            const stored = JSON.parse(localStorage.getItem('studio_reviews_v2') || '[]');
             const container = document.getElementById('reviewsContainer');
             stored.forEach(r => {
                 const card = document.createElement('div');
                 card.className = 'review-card';
-                card.innerHTML = `<div class="rev-user">${escapeHtml(r.user)} <span class="rev-stars">${r.stars}</span></div><p>${escapeHtml(r.text)}</p>`;
+                let starString = '★'.repeat(r.stars) + '☆'.repeat(5 - r.stars);
+                card.innerHTML = `<div class="rev-user">${escapeHtml(r.user)} <span class="rev-stars">${starString}</span></div><p>${escapeHtml(r.text)}</p>`;
                 container.appendChild(card);
             });
         });
@@ -535,30 +577,31 @@
         function postReview() {
             playClickSound();
             const user = document.getElementById('revUser').value.trim();
-            const stars = document.getElementById('revStars').value;
             const text = document.getElementById('revText').value.trim();
 
-            if(!user || !text) { alert("Please complete name and text review inputs."); return; }
+            if(!user || !text) { alert("Please compile both user handle and text box entries."); return; }
 
             const container = document.getElementById('reviewsContainer');
             const card = document.createElement('div');
             card.className = 'review-card';
-            card.innerHTML = `<div class="rev-user">${escapeHtml(user)} <span class="rev-stars">${stars}</span></div><p>${escapeHtml(text)}</p>`;
+            let starString = '★'.repeat(chosenRating) + '☆'.repeat(5 - chosenRating);
+            card.innerHTML = `<div class="rev-user">${escapeHtml(user)} <span class="rev-stars">${starString}</span></div><p>${escapeHtml(text)}</p>`;
             container.appendChild(card);
 
-            const stored = JSON.parse(localStorage.getItem('studio_reviews') || '[]');
-            stored.push({user, stars, text});
-            localStorage.setItem('studio_reviews', JSON.stringify(stored));
+            const stored = JSON.parse(localStorage.getItem('studio_reviews_v2') || '[]');
+            stored.push({user, stars: chosenRating, text});
+            localStorage.setItem('studio_reviews_v2', JSON.stringify(stored));
 
             document.getElementById('revUser').value = '';
             document.getElementById('revText').value = '';
+            setRating(5);
         }
 
         function escapeHtml(str) {
             return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
         }
 
-        // Advanced Webhook Transmission with @everyone Alert
+        // Discord Commission Router with Global Ping Alert
         async function submitForm() {
             playClickSound();
             const name = document.getElementById('mName').value;
@@ -569,29 +612,29 @@
             const refs = document.getElementById('mRefs').value || 'None provided';
             const details = document.getElementById('mDetails').value;
             
-            if(!name || !discord || !details) { alert("Please compile all mandatory text inputs."); return; }
+            if(!name || !discord || !details) { alert("Please complete all mandatory text parameter boxes."); return; }
 
             await fetch(hook, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    content: "⚠️ **@everyone ADVANCED COMMISSION RESERVATION SUBMITTED TO PIPELINE!**",
+                    content: "@everyone 🚨 **NEW ADVANCED BUILD COMMISSIONS SHEET INCOMING!**",
                     embeds: [{
-                        title: "Blasianaww & Porcusa Build Order",
-                        color: 41215,
+                        title: "Blasianaww & Porcusa Project Document",
+                        color: 3447003,
                         fields: [
-                            { name: "Developer / Studio Group", value: name, inline: true },
-                            { name: "Discord Username Handle", value: discord, inline: true },
-                            { name: "Target Commission Budget", value: budget, inline: true },
-                            { name: "Visual Style Focus", value: style, inline: true },
-                            { name: "Target Build Scale", value: scale, inline: true },
-                            { name: "Reference Material Link", value: refs, inline: false },
-                            { name: "Layout Blueprint Specifications", value: details, inline: false }
+                            { name: "Client / Studio Group", value: name, inline: true },
+                            { name: "Discord Profile Handle", value: discord, inline: true },
+                            { name: "Target Budget Limit", value: budget, inline: true },
+                            { name: "Environmental Art Direction", value: style, inline: true },
+                            { name: "Estimated Map Grid Scale", value: scale, inline: true },
+                            { name: "Reference Material Links", value: refs, inline: false },
+                            { name: "Blueprint Directives & Bounds", value: details, inline: false }
                         ]
                     }]
                 })
             });
-            alert("Your project sheet was successfully routed to our team channel.");
+            alert("Your commission parameters sheet has been routed directly to our team queue channel.");
             closeModal();
         }
     </script>
